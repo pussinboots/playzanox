@@ -31,7 +31,7 @@ object Application extends Controller {
   def proxy(fullUrl : String) = Action {
     println(fullUrl)
     val response = Http(url(fullUrl) OK as.String)
-    Ok(response()).as("application/json")
+    Ok(response()).as("application/json").withHeaders("Cache-Control" -> "public, max-age=60, s-maxage=60")
   }
 
 }
