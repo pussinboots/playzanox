@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+
+      Search: <input ng-model="query" ng-change="update()">
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+      </select>
+
+    </div>
+    <div class="span10">
+      <!--Body content-->
+
+      <ul class="products">
+        <li ng-repeat="programItem in products.programItems.programItem" class="thumbnail">
+          <a href="#/product/{{programItem['@id']}}" class="thumb"><img ng-src="{{programItem.image}}"></a>
+          <a href="#/product/{{programItem['@id']}}">{{programItem.name}}</a>
+          <p>{{programItem.description}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
