@@ -1,9 +1,9 @@
 
-The Angular JS Example App - Phonecat -  bundled inside Play Framework 2.0 - Java version.
-Angular JS Example can be found here http://docs.angularjs.org/tutorial
+The Angular JS Example App - zanox Program Search
 
-The json responses are now served by Play Controller at the server side.
-In the Angular JS example app, the json responses were served at the client side..
+The json response will be fetch from http://api.zanox.com but at the moment 
+there a little scala proxy is used to query the zanox api to solve the cross domain 
+problem.
 
 1. git clone
 2. play run 
