@@ -32,6 +32,7 @@
         <li ng-repeat="programItem in products.programItems.programItem" class="thumbnail">
           <a href="#/product/{{programItem['@id']}}" class="thumb"><img ng-src="{{programItem.image}}"></a>
           <a href="#/product/{{programItem['@id']}}">{{programItem.name}}</a>
+          <a href="{{programItem.url}}">Shop</a>
           <p>{{programItem.description}}</p>
         </li>
       </ul>
