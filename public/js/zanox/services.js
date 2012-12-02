@@ -25,8 +25,11 @@
 
 angular.module('productServices', ['ngResource'], function($provide) {
 	  $provide.factory('Product', function($resource){
-		    return $resource('/assets/proxy/:path' , {}, {
-		    	query : {method:'GET', params:{path:'https://api.zanox.com/json/2011-03-01/programs', connectid:'580599047DF8F5311043'}, isArray:false},
+//		    return $resource('/assets/proxy/:path' , {}, {
+//		    	query : {method:'GET', params:{path:'https://api.zanox.com/json/2011-03-01/programs', connectid:'580599047DF8F5311043'}, isArray:false},
+//		    });
+		    return $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/programs' , {}, {
+		    	query : {method:'GET', params:{connectid:'580599047DF8F5311043'}, isArray:false},
 		    });
 		});
 	  $provide.factory('Products', function($resource){

@@ -3,12 +3,26 @@
     <div class="span2">
       <!--Sidebar content-->
 
-      Search: <input ng-model="query" ng-change="update()">
+      Search: <input ng-model="query" ng-change="update()" value="">
+      
+      Region: <select ng-model="region" ng-change="update()">
+        <option value="DE">Deutschland</option>
+        <option value="it">Italien</option>
+      </select>
+      
+      Trefferanzahl: <select ng-model="items" ng-change="update()">
+        <option value="10" selected="selected">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
+      
      <!--  Sort by:
       <select ng-model="orderProp">
         <option value="name">Alphabetical</option>
         <option value="age">Newest</option>
       </select> -->
+      
+      <p>Treffer: {{products.total}}</p>
 
     </div>
     <div class="span10">
@@ -21,7 +35,6 @@
           <p>{{programItem.description}}</p>
         </li>
       </ul>
-
     </div>
   </div>
 </div>

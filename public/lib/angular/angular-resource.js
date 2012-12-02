@@ -296,7 +296,9 @@ angular.module('ngResource', ['ng']).
         var query = [];
         forEach(params, function(value, key){
           if (!self.urlParams[key]) {
+        	  if (typeof value!='undefined') {
             query.push(encodeUriQuery(key) + '=' + encodeUriQuery(value));
+        	  }
           }
         });
         query.sort();
