@@ -1,0 +1,52 @@
+
+<h1>Connect : {{connect.session.connectId}}</h1>
+
+<p>Beschreibung: <p>{{product.programItem[0].description}}</p></p>
+
+<p>Adrank: {{product.programItem[0].adrank}}</p>
+
+<ul class="specs">
+  <li>
+    <span>Policies and Verticals</span>
+    <dl>
+      <dt>Policies</dt>
+      <dd ng-repeat="policy in product.programItem[0].policies">
+    	<p>{{policy["$"]}}</p>
+  	  </dd>
+  	  <dt>Verticals</dt>
+      <dd>
+    	<p>{{product.programItem[0].vertical["$"]}}</p>
+  	  </dd>
+    </dl>
+  </li>
+  <li>
+    <span>Information</span>
+    <dl>
+      <dt>Status</dt>
+      <dd>{{product.programItem[0].status}}</dd>
+      <dt>Start Date</dt>
+      <dd>{{product.programItem[0].startDate}}</dd>
+      <dt>Währung</dt>
+      <dd>{{product.programItem[0].currency}}</dd>
+      <dt>Regions</dt>
+      <dd ng-repeat="region in product.programItem[0].regions">
+    	<p>{{region.region}}</p>
+  	  </dd>
+    </dl>
+  </li>
+  <li>
+    <span>Kategorien</span>
+    <dl>
+      <dt>Kategorien</dt>
+      <dd ng-repeat="category in product.programItem[0].categories">
+    	<li>
+		    <dl>
+		      <dd ng-repeat="categor in category.category">
+		    	<p>{{categor["$"]}}</p>
+		  	  </dd>
+		    </dl>
+		</li>
+  	  </dd>
+    </dl>
+  </li>
+</ul>

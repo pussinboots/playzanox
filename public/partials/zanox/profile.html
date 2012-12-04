@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+       [ <a href="#/products">Programs</a> | <a href="#/profile">Profile</a> ]
+       <hr/>
+      <!--Sidebar content-->
+      
+      
+      
+      <p>Treffer: {{profile.profileItem[0].firstName}}</p>
+
+    </div>
+    <div class="span10">
+      <!--Body content-->
+
+      <ul class="products">
+        <li ng-repeat="programItem in products.programItems.programItem" class="thumbnail">
+          <a href="#/product/{{programItem['@id']}}" class="thumb"><img ng-src="{{programItem.image}}"></a>
+          <a href="#/product/{{programItem['@id']}}">{{programItem.name}}</a>
+          <a href="{{programItem.url}}">Shop</a>
+          <p>{{programItem.description}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
