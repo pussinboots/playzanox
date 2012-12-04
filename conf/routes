@@ -5,6 +5,7 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+GET 	/assets/rest/connect/				controllers.Application.connect(authtoken:String)
 
 GET 	/assets/proxy/*fullUrl			controllers.Application.proxy(fullUrl: String)
 

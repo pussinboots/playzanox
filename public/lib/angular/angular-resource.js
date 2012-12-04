@@ -282,7 +282,7 @@ angular.module('ngResource', ['ng']).
     }
 
     Route.prototype = {
-      url: function(params) {
+      url: function(params, encoding) {
         var self = this,
             url = this.template,
             encodedVal;
@@ -297,13 +297,21 @@ angular.module('ngResource', ['ng']).
         forEach(params, function(value, key){
           if (!self.urlParams[key]) {
         	  if (typeof value!='undefined') {
-            query.push(encodeUriQuery(key) + '=' + encodeUriQuery(value));
+        	  var ev = encodeUriQuery(value);
+        	  //if (key == 'date' || key == 'signature') {
+        	  //	ev = value;
+        	  //}
+            query.push(encodeUriQuery(key) + '=' + ev);
         	  }
           }
         });
         query.sort();
         url = url.replace(/\/*$/, '');
-        return url + encodeURIComponent((query.length ? '?' + query.join('&') : ''));
+        if (encoding) {
+        	return url + '/' + encodeUriQuery((query.length ? '?' + query.join('&') : ''));
+        } else {
+            return url + '/' + (query.length ? '?' + query.join('&') : '');
+        }
       }
     };
 
@@ -330,6 +338,7 @@ angular.module('ngResource', ['ng']).
         Resource[name] = function(a1, a2, a3, a4) {
           var params = {};
           var data;
+          var encoding = false;
           var success = noop;
           var error = null;
           switch(arguments.length) {
@@ -367,9 +376,10 @@ angular.module('ngResource', ['ng']).
           }
 
           var value = this instanceof Resource ? this : (action.isArray ? [] : new Resource(data));
+          encoding = action.encoding ? action.encoding : false
           $http({
             method: action.method,
-            url: route.url(extend({}, extractParams(data), action.params || {}, params)),
+            url: route.url(extend({}, extractParams(data), action.params || {}, params), encoding),
             data: data
           }).then(function(response) {
               var data = response.data;
