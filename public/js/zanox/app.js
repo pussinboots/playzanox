@@ -2,16 +2,16 @@
 
 /* App Module */
 
-angular.module('zanox', ['productFilters', 'productServices']).
+angular.module('zanox', ['productFilters', 'productServices', 'AwesomeChartJS']).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/products', {templateUrl: 'partials/zanox/product-list.html',   controller: ProductListCtrl}).
       when('/profile', {templateUrl: 'partials/zanox/profile.html',   controller: ProfileCtrl}).
       when('/balance', {templateUrl: 'partials/zanox/balance.html',   controller: BalanceCtrl}).
       when('/account', {templateUrl: 'partials/zanox/account.html',   controller: BankAccountsCtrl}).
+      when('/report', {templateUrl: 'partials/zanox/report.html'}).
       when('/programapplication', {templateUrl: 'partials/zanox/programapplication.html',   controller: ProgramApplicationsCtrl}).
       when('/product/:productId', {templateUrl: 'partials/zanox/product-detail.html', controller: ProductDetailCtrl}).
-      //when('/connect/', {templateUrl: 'partials/zanox/connect-detail.html', controller: ConnectCtrl}).
       otherwise({redirectTo: '/products'});
 }]).config(['$locationProvider', function($locationProvider) {
 

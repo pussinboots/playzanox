@@ -15,7 +15,7 @@
           <p>approvedDate: {{programApplication.approvedDate}}</p>
           <p>status :{{programApplication.status}}</p>
           <p>program: 
-          	 <p>name :{{programApplication.program['$']}}</p>
+          	 <a href="#/product/{{programApplication.program['@id']}}">{{programApplication.program['$']}}</a>
           	 <p>id :{{programApplication.program['@id']}}</p>
           	 <p>aktiv :{{programApplication.program['@active']}}</p>
           </p>
