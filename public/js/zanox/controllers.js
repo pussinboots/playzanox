@@ -61,6 +61,10 @@ function BankAccountsCtrl($scope, $rootScope, BankAccounts) {
 	$scope.accounts = BankAccounts.query();
 }
 
+function ProgramApplicationsCtrl($scope, $rootScope, ProgramApplication) {
+	$scope.programApplications = ProgramApplication.query();
+}
+
 function ProductDetailCtrl($scope, $routeParams, Products) {
   $scope.product = Products.get({programId: $routeParams.productId});
 }

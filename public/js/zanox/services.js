@@ -43,6 +43,15 @@ angular.module('productServices', ['ngResource'], function($provide) {
 
   			return resource;
 		});	
+		$provide.factory('ProgramApplication', function($resource, TokenHandler){
+		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/programapplications/' , {}, {
+		    	query : {method:'GET', params:{}, isArray:false, encoding:true},
+		    });
+		    
+		    resource = TokenHandler.wrapSignatureActions( resource, ["query"] , ["GET/programapplications/"]);
+
+  			return resource;
+		});	
 		
 	  $provide.factory('Products', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/programs/program/:programId' , {}, {

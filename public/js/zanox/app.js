@@ -9,6 +9,7 @@ angular.module('zanox', ['productFilters', 'productServices']).
       when('/profile', {templateUrl: 'partials/zanox/profile.html',   controller: ProfileCtrl}).
       when('/balance', {templateUrl: 'partials/zanox/balance.html',   controller: BalanceCtrl}).
       when('/account', {templateUrl: 'partials/zanox/account.html',   controller: BankAccountsCtrl}).
+      when('/programapplication', {templateUrl: 'partials/zanox/programapplication.html',   controller: ProgramApplicationsCtrl}).
       when('/product/:productId', {templateUrl: 'partials/zanox/product-detail.html', controller: ProductDetailCtrl}).
       //when('/connect/', {templateUrl: 'partials/zanox/connect-detail.html', controller: ConnectCtrl}).
       otherwise({redirectTo: '/products'});
