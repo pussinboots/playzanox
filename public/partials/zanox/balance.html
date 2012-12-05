@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+       <hr/>
+      <!--Sidebar content-->
+      
+    </div>
+    <div class="span10">
+      <!--Body content-->
+     
+      <ul class="products">
+        <li ng-repeat="balance in balances.balanceItems.balanceItem" class="thumbnail">
+          <p>Waehrung: {{balance['@id']}}</p>
+          <p>Offen: {{balance.open}}</p>
+          <p>Bestaettigt: {{balance.confirmed}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

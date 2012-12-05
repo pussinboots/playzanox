@@ -10,7 +10,4 @@ problem.
 3. Open browser to http://localhost:9000
 
 
-Additonal details on my blog - http://basav.github.com
-
-
-
+Live Demo http://playzanox.herokuapp.com/assets/products.html

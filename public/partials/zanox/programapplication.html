@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+       <hr/>
+      <!--Sidebar content-->
+      <p>Treffer: {{programApplications.total}}</p>
+    </div>
+    <div class="span10">
+      <!--Body content-->
+     
+      <ul class="products">
+        <li ng-repeat="programApplication in programApplications.programApplicationItems.programApplicationItem" class="thumbnail">
+          <p>Id: {{programApplication['@id']}}</p>
+          <p>allowTpv: {{programApplication.allowTpv}}</p>
+          <p>approvedDate: {{programApplication.approvedDate}}</p>
+          <p>status :{{programApplication.status}}</p>
+          <p>program: 
+          	 <p>name :{{programApplication.program}}</p>
+          	 <p>id :{{programApplication.program['@id']}}</p>
+          	 <p>aktiv :{{programApplication.program['@active']}}</p>
+          </p>
+          <p>adspace: 
+          	 <p>name :{{programApplication.adspace}}</p>
+          	 <p>id :{{programApplication.adspace['@id']}}</p>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
