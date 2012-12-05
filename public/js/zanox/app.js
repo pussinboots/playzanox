@@ -8,9 +8,12 @@ angular.module('zanox', ['productFilters', 'productServices']).
       when('/products', {templateUrl: 'partials/zanox/product-list.html',   controller: ProductListCtrl}).
       when('/profile', {templateUrl: 'partials/zanox/profile.html',   controller: ProfileCtrl}).
       when('/product/:productId', {templateUrl: 'partials/zanox/product-detail.html', controller: ProductDetailCtrl}).
-      when('/connect/', {templateUrl: 'partials/zanox/connect-detail.html', controller: ConnectCtrl}).
+      //when('/connect/', {templateUrl: 'partials/zanox/connect-detail.html', controller: ConnectCtrl}).
       otherwise({redirectTo: '/products'});
-}]).run(function($rootScope) {
+}]).config(['$locationProvider', function($locationProvider) {
+
+}])
+.run(function($rootScope) {
   $rootScope.apikey =  {"session": {"connectId": "580599047DF8F5311043", "secretKey": "newURI", "sessionExpires": "asdad","sessionKey":"asd"}};
 }).factory('TokenHandler', function($rootScope) {
   var tokenHandler = {};
