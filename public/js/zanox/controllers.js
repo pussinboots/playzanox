@@ -48,8 +48,13 @@ $scope.$watch('(location.search()).authtoken', function($routeParams) {
     }
 }
 
-function ProfileCtrl($scope, Profile) {
+function ProfileCtrl($scope, $rootScope, Profile) {
 	$scope.profile = Profile.query();
+	$rootScope.profile = $scope.profile;
+}
+
+function BalanceCtrl($scope, $rootScope, Balance) {
+	$scope.balances = Balance.query();
 }
 
 function ProductDetailCtrl($scope, $routeParams, Products) {

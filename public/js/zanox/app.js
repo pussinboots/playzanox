@@ -7,6 +7,7 @@ angular.module('zanox', ['productFilters', 'productServices']).
   $routeProvider.
       when('/products', {templateUrl: 'partials/zanox/product-list.html',   controller: ProductListCtrl}).
       when('/profile', {templateUrl: 'partials/zanox/profile.html',   controller: ProfileCtrl}).
+      when('/balance', {templateUrl: 'partials/zanox/balance.html',   controller: BalanceCtrl}).
       when('/product/:productId', {templateUrl: 'partials/zanox/product-detail.html', controller: ProductDetailCtrl}).
       //when('/connect/', {templateUrl: 'partials/zanox/connect-detail.html', controller: ConnectCtrl}).
       otherwise({redirectTo: '/products'});
@@ -39,8 +40,8 @@ angular.module('zanox', ['productFilters', 'productServices']).
 	return new Date().getTime() + '' + new Date().getTime()
   };
   
-  tokenHandler.getSignature = function(time, nonce) {
-    var phrase = 'GET/profiles/' + time.toGMTString() + nonce;
+  tokenHandler.getSignature = function(uri, time, nonce) {
+    var phrase = uri + time.toGMTString() + nonce;
     console.log(phrase);
     var hash = CryptoJS.HmacSHA1(phrase, this.getSecretKey(), { asString: true });
     hash = CryptoJS.enc.Base64.stringify(hash);
@@ -80,19 +81,19 @@ angular.module('zanox', ['productFilters', 'productServices']).
   
   // wraps given actions of a resource to send auth token
   // with every request
-  tokenHandler.wrapSignatureActions = function( resource, actions ) {
+  tokenHandler.wrapSignatureActions = function( resource, actions, uris ) {
     // copy original resource
     var wrappedResource = resource;
     // loop through actions and actually wrap them
     for (var i=0; i < actions.length; i++) {
-      tokenWrapperSignature( wrappedResource, actions[i] );
+      tokenWrapperSignature( wrappedResource, actions[i], uris[i] );
     };
     // return modified copy of resource
     return wrappedResource;
   };
   
     // wraps resource action to send request with auth token
-  var tokenWrapperSignature = function( resource, action ) {
+  var tokenWrapperSignature = function( resource, action, uri ) {
     // copy original action
     resource['_' + action]  = resource[action];
     // create new action wrapping the original
@@ -104,12 +105,12 @@ angular.module('zanox', ['productFilters', 'productServices']).
       console.log('nonce ' + no);
       console.log('secret key ' + tokenHandler.getSecretKey());
       console.log('ti ' + ti.toGMTString());
-      console.log('signature ' + tokenHandler.getSignature(ti, no));
+      console.log('signature ' + tokenHandler.getSignature(uri, ti, no));
       return resource['_' + action](
         // call action with provided data and
         // appended access_token
         angular.extend({}, data || {},
-          {connectId: tokenHandler.getConnectId(), nonce : no, date : ti.toGMTString(), signature:tokenHandler.getSignature(ti, no)}),
+          {connectId: tokenHandler.getConnectId(), nonce : no, date : ti.toGMTString(), signature:tokenHandler.getSignature(uri, ti, no)}),
         //headers: { 'Auth-Nonce-Response': 'adad'},
         success,
         error

@@ -217,7 +217,7 @@ angular.module('ngResource', ['ng']).
     var DEFAULT_ACTIONS = {
       'get':    {method:'GET'},
       'save':   {method:'POST'},
-      'query':  {method:'GET', isArray:true},
+      'query':  {method:'GET', isArray:true, uri:''},
       'remove': {method:'DELETE'},
       'delete': {method:'DELETE'}
     };

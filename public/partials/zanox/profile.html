@@ -1,14 +1,20 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
-       [ <a href="#/products">Programs</a> | <a href="#/profile">Profile</a> ]
+       [ <a href="#/products">Programs</a> | <a href="#/profile">Profile</a> | <a href="#/balance">Balance</a>  ] 
        <hr/>
       <!--Sidebar content-->
       
       
       
-      <p>Treffer: {{profile.profileItem[0].firstName}}</p>
-
+      <p>Vorname: {{profile.profileItem[0].firstName}}</p>
+      <p>Nachname: {{profile.profileItem[0].lastName}}</p>
+      <p>Adrank: {{profile.profileItem[0].adrank}}</p>
+      <p>Stadt: {{profile.profileItem[0].city}}</p>
+      <p>Firma: {{profile.profileItem[0].company}}</p>
+      <p>Land: {{profile.profileItem[0].country}}</p>
+      <p>EMail: {{profile.profileItem[0].email}}</p>
+ 
     </div>
     <div class="span10">
       <!--Body content-->
