@@ -15,12 +15,12 @@
           <p>approvedDate: {{programApplication.approvedDate}}</p>
           <p>status :{{programApplication.status}}</p>
           <p>program: 
-          	 <p>name :{{programApplication.program}}</p>
+          	 <p>name :{{programApplication.program['$']}}</p>
           	 <p>id :{{programApplication.program['@id']}}</p>
           	 <p>aktiv :{{programApplication.program['@active']}}</p>
           </p>
           <p>adspace: 
-          	 <p>name :{{programApplication.adspace}}</p>
+          	 <p>name :{{programApplication.adspace['$']}}</p>
           	 <p>id :{{programApplication.adspace['@id']}}</p>
           </p>
         </li>
