@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="lib/angular/angular.js"></script>
   <script src="js/zanox/app.js"></script>
+  <script src="js/zanox/ahighchart.js"></script>
   <script src="js/zanox/controllers.js"></script>
   <script src="js/zanox/filters.js"></script>
   <script src="js/zanox/services.js"></script>
@@ -15,12 +16,14 @@
   <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/hmac-sha1.js"></script>
   <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js"></script>
   <script type='text/javascript' src="https://raw.github.com/cyberpython/AwesomeChartJS/master/awesomechart.js"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
   <script type='text/javascript' src="https://raw.github.com/pkozlowski-opensource/angularjs-AwesomeChartJS/master/src/charts.js"></script>
 </head>
 <body>
   <a target="_self" href="https://auth.zanox.com/login?appid=5D336A34EFF993538996">connect</a> Willkommen {{profile.profileItem[0].loginName}}
   <br />
-   [ <a href="#/products">Programs</a> | <a href="#/profile">Profile</a> | <a href="#/balance">Balance</a> | <a href="#/account">Account</a> | <a href="#/programapplication">ProgramApplication</a> | <a href="#/report">Reports</a> ]
+   [ <a href="#/products">Programs</a> | <a href="#/profile">Profile</a> | <a href="#/balance">Balance</a> | <a href="#/account">Account</a> | <a href="#/programapplication">ProgramApplication</a> | <a href="#/report">Reports (Highchart)</a> | <a href="#/reportawe">Reports (Awesomechart)</a> ]
   <hr />
   <div ng-view ng-controller="ConnectCtrl"></div>
 </body>

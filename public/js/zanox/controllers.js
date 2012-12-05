@@ -87,6 +87,31 @@ function MyCtrl($scope, Report) {
     ];*/
 }
 
+function HiChartCtrl($scope, Report) {
+    $scope.report = Report.query();
+    $scope.report = Report.query({},{},
+	    function(result) {
+	      console.log(result);
+	      $scope.d = [];
+	       angular.forEach(result.reportItems.reportItem, function(report) {
+	      	$scope.d.push([report.month, report.total.clickCount]);
+	      })
+	      $scope.data = {name:'click', data:$scope.d};
+	      console.log($scope.data);
+	    });
+	    
+   
+    
+    //usage stats for 05/2012 from http://www.w3schools.com/browsers/browsers_stats.asp
+    /*$scope.data = [
+        {label:'Chrome', value:39.3, color:'#39E639'},
+        {label:'Firefox', value:35.2, color:'#FFA640'},
+        {label:'IE', value:18.1, color:'#3CA0D0'},
+        {label:'Safari', value:4.3, color:'#A60000'},
+        {label:'Opera', value:2.2, color:'#BF3030'}
+    ];*/
+}
+
 function ProductDetailCtrl($scope, $routeParams, Products) {
   $scope.product = Products.get({programId: $routeParams.productId});
 }

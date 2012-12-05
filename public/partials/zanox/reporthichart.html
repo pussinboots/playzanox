@@ -1,6 +1,6 @@
-<div ng-controller="MyCtrl">
+<div ng-controller="HiChartCtrl">
 
-    <awesomechart title="Browsers stats" type="exploded pie" id='chart1' width="400" height="400" data="data"></awesomechart>
+   <!--<awesomechart title="Browsers stats" type="exploded pie" id='chart1' width="400" height="400" data="data"></awesomechart>
     
     <awesomechart type="pie" id='chart2' width="400" height="400" data="data">
     </awesomechart>
@@ -15,9 +15,9 @@
     </awesomechart>
     
      <awesomechart type="pareto" id='chart6' width="400" height="400" data="data">
-    </awesomechart>
+    </awesomechart>-->
     
-    
+    <hichart title="Browsers stats" type="line" id='chart1' width="400" height="400" data="data"></hichart>
  <ul class="products">
         <li ng-repeat="reportItem in report.reportItems.reportItem" class="thumbnail">
           <p>{{reportItem.currency}}</p>
