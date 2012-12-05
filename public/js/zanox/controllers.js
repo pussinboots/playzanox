@@ -65,16 +65,26 @@ function ProgramApplicationsCtrl($scope, $rootScope, ProgramApplication) {
 	$scope.programApplications = ProgramApplication.query();
 }
 
-function MyCtrl($scope) {
+function MyCtrl($scope, Report) {
+    $scope.report = Report.query();
+    $scope.data = [];
+    $scope.report = Report.query({},{},
+	    function(result) {
+	      console.log(result);
+	       angular.forEach(result.reportItems.reportItem, function(report) {
+	      	$scope.data.push({label:report.month, value:report.total.clickCount, color:'#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6)});
+	      })
+	    });
+   
     
     //usage stats for 05/2012 from http://www.w3schools.com/browsers/browsers_stats.asp
-    $scope.data = [
+    /*$scope.data = [
         {label:'Chrome', value:39.3, color:'#39E639'},
         {label:'Firefox', value:35.2, color:'#FFA640'},
         {label:'IE', value:18.1, color:'#3CA0D0'},
         {label:'Safari', value:4.3, color:'#A60000'},
         {label:'Opera', value:2.2, color:'#BF3030'}
-    ];
+    ];*/
 }
 
 function ProductDetailCtrl($scope, $routeParams, Products) {
