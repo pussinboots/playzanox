@@ -1,4 +1,4 @@
-{ "menues" : 	[   { "link" : "https://auth.zanox.com/login?appid=5D336A34EFF993538996&callback=http://localhost:9000/assets/products.html", "name" : "Connect"},
+{ "menues" : 	[   { "link" : "https://auth.zanox.com/login?appid=5D336A34EFF993538996", "name" : "Connect"},
 					{ "link" : "#/dashboard/", "name" : "Dashboard"},
 									  { "link" : "#/profile/"  , "name" : "Profile", 
 									    "submenues" : [{"link" : "#/adspace/", "name": "Meine Werbeflächen" },
