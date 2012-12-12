@@ -310,7 +310,7 @@ angular.module('ngResource', ['ng']).
         if (encoding) {
         	return url + '/' + encodeUriQuery((query.length ? '?' + query.join('&') : ''));
         } else {
-            return url + '/' + (query.length ? '?' + query.join('&') : '');
+            return url + (query.length ? '?' + query.join('&') : '');
         }
       }
     };
