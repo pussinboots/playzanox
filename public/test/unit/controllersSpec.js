@@ -1,7 +1,7 @@
 'use strict';
 
 /* jasmine specs for controllers go here */
-describe('PhoneCat controllers', function() {
+describe('ProductListCtrl controllers', function() {
 
   beforeEach(function(){
     this.addMatchers({
@@ -12,19 +12,19 @@ describe('PhoneCat controllers', function() {
   });
 
 
-  beforeEach(module('phonecatServices'));
+  beforeEach(module('productServices'));
 
 
-  describe('PhoneListCtrl', function(){
+  describe('ProductListCtrl', function(){
     var scope, ctrl, $httpBackend;
 
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('phones/phones.json').
+      $httpBackend.expectGET().
           respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
 
       scope = $rootScope.$new();
-      ctrl = $controller(PhoneListCtrl, {$scope: scope});
+      ctrl = $controller(ProductListCtrl, {$scope: scope});
     }));
 
 

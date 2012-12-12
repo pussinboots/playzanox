@@ -1,0 +1,191 @@
+
+<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+<noscript>
+	<div
+		style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+		Sie müssen JavaScript in Ihrem Webbrowser aktivieren, um diese Applikation fehlerfrei nutzen zu können.</div>
+</noscript>
+
+<div id="darwinStartPageMainContainer">
+	<!-- GWT Header -->
+	<div id="zx-gwt-header" style="padding: 0 10px;"></div>
+
+	<!-- Content -->
+	<div class="mainContentContainer">
+
+		<!-- top block -->
+		<div class="clearfix">
+
+			<!-- Chart Container -->
+			<div style="float: left; width: 70%;">
+
+				<div id="chartContainer" style="margin-right: 10px;" class="standardBox">
+					<div class="boxMainHeader clearfix">
+						<div style="float: left">
+							<h2 class="chartHeadline">Performance - Letzte 30 Tage</h2>
+							<span id="performanceActualTimeContainer"></span>
+						</div>
+						<div style="float: right;">
+							<a class="statisticLink"
+								href="https://auth.zanox.com/login?appid=5B8E9D140268FF0CC9E8&connectid=F78BD644A51B90AB43FC"> <img
+								src="./images/chart_curve.png" class='statistics' /> <span> Zur Statistik </span> <img
+								src="images/arrow_orange_mid.png" class="arrow">
+							</a>
+						</div>
+					</div>
+
+					<div id="outerChartContainer" style="padding: 10px; background-color: #f5f5f5">
+						<div id="chart-container" style="height: 179px; width: 616px">
+							<img src="./images/loader-animation.gif" style="margin: auto auto auto auto; display: block;" border="0" />
+						</div>
+					</div>
+
+					<div id="chartControlsContainer">
+
+						<div class="clearfix" style="text-align: center;">
+							<form class="chartTypesControl" action="#">
+								<input checked="checked" class="chartControl" type="radio" name="chartType" value="transactions" />
+								Transaktionen / Provisionen &nbsp; <input class="chartControl" type="radio" name="chartType" value="views" />
+								Views / Klicks &nbsp; <input class="chartControl" type="radio" name="chartType" value="ecpc" /> eCPM / eCPC
+								&nbsp; <input class="chartControl" type="radio" name="chartType" value="clicks" /> Klicks / Transaktionen
+								&nbsp; <span id="currencySelectContainer"> <select id="currencySelect" size="1" style="display: none;">
+								</select>
+								</span>
+
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+			<!-- Performance Container -->
+			<div style="float: left; width: 30%;">
+
+				<!-- "Performance" Box -->
+				<div class="performanceBox">
+					<div class="boxMainHeader">
+						<h2 style="float: left">Account-Übersicht</h2>
+
+						<div style="float: right;">
+							<img src="./images/help.png"
+								title='Der hier angezeigte Kontostand ist unverbindlich und dient nur zu Informationszwecken.' />
+
+						</div>
+					</div>
+
+					<dl class="light clearfix" style="padding-top: 10px;">
+						<dt id="monthsPerfConf">Kontostand (bestätigt):</dt>
+					</dl>
+					<dl class="light clearfix">
+						<dd class="value">
+							<span id="balanceInfoConfirmedContainer"></span>
+						</dd>
+					</dl>
+					<dl class="light clearfix ">
+						<dt id="monthsPerfPending">Kontostand (offen / freigegeben):</dt>
+					</dl>
+					<dl class="light clearfix borderbottom" style="padding-bottom: 10px;">
+						<dd class="value">
+							<span id="balanceInfoOpenApprovedContainer"></span>
+						</dd>
+
+					</dl>
+					<dl class="clearfix small" style="padding-top: 10px;">
+						<dt id="openPayments">Ausstehende Auszahlungen:</dt>
+						<dd class="value">
+							<span id="openPaymentContainer"> <a class="performance"
+								href="https://auth.zanox.com/login?appid=0EC8CDE4B4C95801E803&connectid=F78BD644A51B90AB43FC&dest=openPayments">
+									Detailansicht </a> <img src="./images/arrow_orange_mid.png" class='arrow'>
+							</span>
+						</dd>
+					</dl>
+					<dl class="clearfix small">
+						<dt id="accountInfo">Ihre Account-Informationen:</dt>
+						<dd class="value">
+							<span id="accountInfoContainer"> <a class="performance"
+								href="#/account">
+									Detailansicht </a> <img src="./images/arrow_orange_mid.png" class='arrow'>
+							</span>
+						</dd>
+					</dl>
+					<dl class="clearfix small">
+						<dt id="segmentationInfo">Ihr zanox Vertical-Segment:</dt>
+						<dd class="value">
+							<span> <a id="segmentationInfoContainer" target='_blank' class='performance'
+								href='http://wiki.zanox.com/en/Zanox_Segmentation'> </a>
+							</span>
+						</dd>
+					</dl>
+					<dl class="clearfix small">
+						<dt id="adrankInfo">Ihr zanox AdRank (0-10):</dt>
+						<dd class="value">
+							<span id="adrankInfoContainer"><b>{{profile.profileItem[0].adrank}}</b></span>
+						</dd>
+					</dl>
+					<dl class="clearfix small" style="border-bottom: 1px solid #D6D6D6; padding-bottom: 5px">
+						<dt id="adspaceInfo">Ihre Werbefläche(n):</dt>
+						<dd class="value">
+							<span id="adspaceInfoContainer"> <a class="performance"
+								href="#/adspace/">
+									Verwalten </a> <img src="./images/arrow_orange_mid.png" class='arrow'>
+							</span>
+						</dd>
+					</dl>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- bottom block -->
+		<div class="clearfix">
+
+			<!-- Promo News Container -->
+			<div style="float: left; width: 70%;">
+				<div id="newsContainer" style="margin-right: 10px;" class="standardBox">
+					<div class="boxMainHeader clearfix">
+						<h2>Advertiser-Promotions</h2>
+					</div>
+					<div class="newsContentContainer" id="promoNews"></div>
+				</div>
+			</div>
+
+			<!-- Marketing News Container -->
+			<div style="float: left; width: 30%;">
+
+				<div class="performanceBox" class="standardBox">
+					<div class="boxMainHeader">
+						<h2 style="float: left">Neues bei zanox</h2>
+					</div>
+					<div class="newsContentContainer" id="marketingNews" style="height: 293px; border-bottom: 1px solid #D6D6D6;">
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Recent Programs Container -->
+		<div class="newProgramsContainer" id="recentPrograms"></div>
+
+
+		<!-- back to classic box -->
+
+
+		<div class="backToClassicContainer">
+			Zurück zu zanox "classic" <a
+				href="https://auth.zanox.com/login?appid=2CED1F145D087BBE88A3&connectid=F78BD644A51B90AB43FC&dest=settings%2Fmarketplace-exit">
+				<img src="./images/link_arrow.png" style="vertical-align: middle;" alt="back to zanox classic" />
+			</a>
+		</div>
+
+
+	</div>
+
+	<div id="footer">
+		<a href='http://www.zanox.com/de/kontakt-impressum/' target="_blank" style="padding-right: 5px;">Impressum</a>|<a
+			href="http://www.zanox.com" target="_blank" style="padding-left: 5px;">zanox.com</a>
+	</div>
+
+</div>

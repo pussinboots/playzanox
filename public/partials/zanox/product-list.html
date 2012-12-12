@@ -1,8 +1,7 @@
-<div class="container-fluid">
+<!--<div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
        <hr/>
-      <!--Sidebar content-->
       
       Search: <input ng-model="query" ng-change="update()" value="">
       
@@ -17,26 +16,86 @@
         <option value="50">50</option>
       </select>
       
-     <!--  Sort by:
-      <select ng-model="orderProp">
-        <option value="name">Alphabetical</option>
-        <option value="age">Newest</option>
-      </select> -->
-      
-      <p>Treffer: {{products.total}}</p>
-
     </div>
-    <div class="span10">
-      <!--Body content-->
-
-      <ul class="products">
-        <li ng-repeat="programItem in products.programItems.programItem" class="thumbnail">
-          <a href="#/product/{{programItem['@id']}}" class="thumb"><img ng-src="{{programItem.image}}"></a>
-          <a href="#/product/{{programItem['@id']}}">{{programItem.name}}</a>
-          <a href="{{programItem.url}}">Shop</a>
-          <p>{{programItem.description}}</p>
-        </li>
-      </ul>
-    </div>
+    
   </div>
+</div>-->
+<link href="images/zanox/pcombine.css" media="screen" rel="stylesheet" type="text/css">
+<div id="directoryLeft">
+	<p id="resetSearch">
+		<span id="reset">Zurücksetzen</span>
+	</p>
+
+
+
+	<div id="directorySearch" class="boxLtGrey noPaddingBottom" data-param="searchTerms" data-refinetype="textBox">
+		<h2 class="noMarginBottom">Programme suchen</h2>
+		<dl class="zend_form">
+			<dd id="searchTerms-element">
+				<input placeholder="Name oder Suchbegriff" name="searchTerms" id="searchTerms" type="text" ng-model="query"
+					ng-change="update()" value="">
+			</dd>
+		</dl>
+	</div>
+	<div id="directoryRefineby" class="boxLtGrey">
+		<!-- sectors -->
+		<h2 class="noMarginBottom">Suche einschränken</h2>
+
+		<h3>
+			<span class="expanded">Vertriebsgebiete</span>
+		</h3>
+		<div class="refinebyExpanded" id="affiliateSalesRegions">
+			<ul>
+				<li class="radio" id="affiliateSalesRegions-all"><label>Weitere Vertriebsgebiete</label> <select
+					ng-model="region" ng-change="update()">
+						<option value="DE">Deutschland</option>
+						<option value="it">Italien</option>
+				</select></li>
+			</ul>
+		</div>
+	</div>
 </div>
+
+<div style="position: relative;" id="directory">
+	<div id="directoryResults">
+		<div id="resultsHeader">
+
+			<div id="optionsButton">
+				<h3>Optionen</h3>
+				<ul id="optionsMenu">
+					<li id="detailToggle" title="Auf Detailansicht umschalten" class="">
+						<h3 class="pointer">Detailansicht</h3>
+					</li>
+					<li title="Report als CSV-Datei herunterladen" class="pointer" id="downloadCSV">
+						<h3>CSV-Export</h3>
+					</li>
+					<li title="Report für Microsoft Office Excel herunterladen" class="pointer" id="downloadExcel">
+						<h3>Excel-Export</h3>
+					</li>
+				</ul>
+			</div>
+
+			<span id="rows">Ergebnisse pro Seite: <select ng-model="items" ng-change="update()">
+					<option value="10" selected="selected">10</option>
+					<option value="20">20</option>
+					<option value="50">50</option>
+			</select>
+			</span>
+
+			<h1>
+				<strong>Alle Programme</strong> ({{products.total}})
+			</h1>
+		</div>
+		<div class="span10">
+
+			<ul class="products">
+				<li ng-repeat="programItem in products.programItems.programItem" class="thumbnail"><a
+					href="#/product/{{programItem['@id']}}" class="thumb"><img ng-src="{{programItem.image}}"></a> <a
+					href="#/product/{{programItem['@id']}}">{{programItem.name}}</a> <a href="{{programItem.url}}">Shop</a>
+					<p>{{programItem.description}}</p></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="clear"></div>

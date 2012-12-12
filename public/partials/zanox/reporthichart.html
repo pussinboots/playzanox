@@ -1,23 +1,14 @@
-<div ng-controller="HiChartCtrl">
+<div>
 
-   <!--<awesomechart title="Browsers stats" type="exploded pie" id='chart1' width="400" height="400" data="data"></awesomechart>
-    
-    <awesomechart type="pie" id='chart2' width="400" height="400" data="data">
-    </awesomechart>
-    
-    <awesomechart type="doughnut" id='chart3' width="400" height="400" data="data">
-    </awesomechart>
-    
-    <awesomechart type="default" id='chart4' width="400" height="400" data="data">
-    </awesomechart>
-    
-    <awesomechart type="horizontal bars" id='chart5' width="400" height="400" data="data">
-    </awesomechart>
-    
-     <awesomechart type="pareto" id='chart6' width="400" height="400" data="data">
-    </awesomechart>-->
+    <input ui-date name="from"></input>
+    <input ui-date name="to"></input>
     
     <hichart title="Browsers stats" type="line" id='chart1' width="400" height="400" data="data"></hichart>
+    
+    <hichart title="Browsers stats" type="bar" id='chart2' width="400" height="400" data="data"></hichart>
+    
+    <hichart title="Browsers stats" type="pie" id='chart3' width="400" height="400" data="data"></hichart>
+    
  <ul class="products">
         <li ng-repeat="reportItem in report.reportItems.reportItem" class="thumbnail">
           <p>{{reportItem.currency}}</p>
@@ -26,6 +17,6 @@
         </li>
       </ul>
 
-{{report}}
+{{data}}
      
 </div>
