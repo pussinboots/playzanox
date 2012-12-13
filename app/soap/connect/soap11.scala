@@ -26,15 +26,13 @@ trait Soap11Clients { this: HttpClients =>
         case elem: scala.xml.Elem => elem
         case x => error("unexpected non-elem: " + x.toString)
       }}
-      println(r)
       val headers = scala.collection.mutable.Map[String, String]("Content-Type" -> "text/xml; charset=utf-8") ++
         (action map { x => "SOAPAction" -> """"%s"""".format(x)})
 
       val s = httpClient.request(r map {_.toString} getOrElse {""}, address, headers.toMap)
-println(s)
+
       try {
         val response = scala.xml.XML.loadString(s)
-        
         scalaxb.fromXML[Envelope](response)
       }
       catch {

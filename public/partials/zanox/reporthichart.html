@@ -1,7 +1,10 @@
 <div>
 
-    <input ui-date name="from"></input>
-    <input ui-date name="to"></input>
+    <div>
+        <p><b>Date from</b> <input ng-change="update()" type="text" id="date1"  ng-model="fromDate" datepicker /></p>
+        <p><b>Data do:</b> <input ng-change="update()" type="text" id="date2" ng-model="toDate" datepicker /></p>
+        Choosen date from: {{fromDate}} to: {{toDate}}
+    </div>
     
     <hichart title="Browsers stats" type="line" id='chart1' width="400" height="400" data="data"></hichart>
     
@@ -9,7 +12,7 @@
     
     <hichart title="Browsers stats" type="pie" id='chart3' width="400" height="400" data="data"></hichart>
     
- <ul class="products">
+ 	<ul class="products">
         <li ng-repeat="reportItem in report.reportItems.reportItem" class="thumbnail">
           <p>{{reportItem.currency}}</p>
           <p>{{reportItem.month}}</p>

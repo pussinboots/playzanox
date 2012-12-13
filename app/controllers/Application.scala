@@ -13,8 +13,8 @@ import dispatch._
 import soap.connect.utils.ConnectClient
 import spray.json._
 import DefaultJsonProtocol._
-import org.zanox.connect.GetSessionResponse
-import org.zanox.connect.SessionType
+import soap.connect.GetSessionResponse
+import soap.connect.SessionType
 import dispatch.as.File
 import java.io.File
 import java.io.FileWriter

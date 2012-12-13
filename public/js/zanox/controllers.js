@@ -79,7 +79,7 @@ function ProgramApplicationsCtrl($scope, $rootScope, ProgramApplication) {
 	$scope.programApplications = ProgramApplication.query();
 }
 
-function MyCtrl($scope, Report) {
+function MyCtrl($scope, $routeParams, Report) {
 	$scope.data = [];
 	$scope.report = Report.query({currency:'EUR',groupby:'month',fromdate:'2012-01-01', todate:'2012-12-02'},{},
 			function(result) {
@@ -92,7 +92,10 @@ function MyCtrl($scope, Report) {
 }
 
 function HiChartCtrl($scope, Report) {
-	$scope.report = Report.query({currency:'EUR',groupby:'month',fromdate:'2012-01-01', todate:'2012-12-02'},{},
+ 	$scope.fromDate = '2012-01-01'
+ 	$scope.toDate = '2012-12-31'
+ 	$scope.update = function() {
+	$scope.report = Report.query({currency:'EUR',groupby:'month',fromdate:$scope.fromDate, todate:$scope.toDate},{},
 			function(result) {
 		console.log(result);
 		$scope.clicks = [];
@@ -105,14 +108,8 @@ function HiChartCtrl($scope, Report) {
 		console.log($scope.data);
 	}
 	);
-	/*$scope.data = [{name:'click', 
-		data:[	['Chrome','39.3'],
-		      	['Firefox','35.2'],
-		      	['IE', '18.1'],
-		      	['Safari','4.3'],
-		      	['Opera','2.2']
-		]
-	}];*/
+	}
+	$scope.update();
 }
 
 function ProductDetailCtrl($scope, $routeParams, Products) {

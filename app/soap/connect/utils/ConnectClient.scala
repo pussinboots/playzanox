@@ -1,7 +1,7 @@
 
 package soap.connect.utils
 
-import org.zanox.connect.ConnectServiceBindings
+import soap.connect.ConnectServiceBindings
 import scalaxb.Soap11Clients
 import scalaxb.DispatchHttpClients
 import java.util.Calendar
@@ -14,7 +14,7 @@ object ConnectClient {
 
   val connect = new ConnectServiceBindings with Soap11Clients with DispatchHttpClients {}
 
-  def getSession(authToken: String): org.zanox.connect.GetSessionResponse = {
+  def getSession(authToken: String): soap.connect.GetSessionResponse = {
 
     val now = Calendar.getInstance();
     val nonce = System.nanoTime().toString + System.nanoTime().toString;
