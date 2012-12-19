@@ -2,7 +2,7 @@
 
 /* App Module */
 //'ui.directives.date',
-angular.module('zanox', ['NullIfEmpty', 'DatePicker', 'productFilters', 'productServices', 'AwesomeChartJS', 'HighchartJs' ]).config(function($routeProvider) {
+angular.module('zanox', ['loadingOnAJAX', 'DatePicker', 'productFilters', 'productServices', 'AwesomeChartJS', 'HighchartJs' ]).config(function($routeProvider) {
 	$routeProvider.when('/dashboard', { templateUrl : 'partials/zanox/dashboard.html', controller : DashBoardCtrl })
 	        .when('/products', { templateUrl : 'partials/zanox/product-list.html', controller : ProductListCtrl })
 	        .when('/profile', { templateUrl : 'partials/zanox/profile.html', controller : ProfileCtrl })
