@@ -2,7 +2,7 @@
 
 /* App Module */
 //'ui.directives.date',
-angular.module('zanox', ['DatePicker', 'productFilters', 'productServices', 'AwesomeChartJS', 'HighchartJs' ]).config([ '$routeProvider', function($routeProvider) {
+angular.module('zanox', ['NullIfEmpty', 'DatePicker', 'productFilters', 'productServices', 'AwesomeChartJS', 'HighchartJs' ]).config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/dashboard', { templateUrl : 'partials/zanox/dashboard.html', controller : DashBoardCtrl })
 	        .when('/products', { templateUrl : 'partials/zanox/product-list.html', controller : ProductListCtrl })
 	        .when('/profile', { templateUrl : 'partials/zanox/profile.html', controller : ProfileCtrl })
@@ -15,7 +15,7 @@ angular.module('zanox', ['DatePicker', 'productFilters', 'productServices', 'Awe
 	        .when('/product/:productId', { templateUrl : 'partials/zanox/product-detail.html', controller : ProductDetailCtrl })
 	        .otherwise({ redirectTo : '/dashboard' });
 } ]).config([ '$locationProvider', function($locationProvider) {
-
+	$locationProvider.html5Mode(false)
 } ]).run(function($rootScope, Menue, $compile) {
 	$rootScope.apikey = { "session" : { "connectId" : "580599047DF8F5311043", "secretKey" : "newURI", "sessionExpires" : "asdad", "sessionKey" : "asd" }};
 	
@@ -127,7 +127,7 @@ angular.module('zanox', ['DatePicker', 'productFilters', 'productServices', 'Awe
 			// call action with provided data and
 			// appended access_token
 			angular.extend({}, data || {}, getAuthParams(uri)),
-			{d:'asd'},
+			data,
 			success, error);
 		};
 	};
