@@ -36,6 +36,16 @@
 
 </head>
 <body class="zanox flexible">
+<!--[if lte IE 6]>
+    <div id="ie6" class="ie6">
+    <![endif]-->
+    <!--[if IE 7]>
+    <div id="ie7">
+    <![endif]-->
+    <!--[if gt IE 7]>
+    <div id="ie8">
+    <![endif]-->
+
 	<div id="container">
 		<div id="header">
 			<div id="headerLogo">
@@ -152,6 +162,10 @@
 	<hr />-->
 		<div id="content" ng-view ng-controller="ConnectCtrl"></div>
 	</div>
+	<!--[if IE]>
+    </div>
+    <![endif]-->
+	
 </body>
 </html>
 	
