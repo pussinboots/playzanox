@@ -92,7 +92,7 @@ angular.module('productServices', ['ngResource'], function($provide) {
 		
 	  $provide.factory('Menue', function($resource){
 		  return $resource('/assets/global/menue.json' , {}, {
-		    	query : {method:'GET', params:{}, isArray:false},
+		    	query : {method:'GET', params:{}, isArray:false}
 		    });
 		});
 	});
