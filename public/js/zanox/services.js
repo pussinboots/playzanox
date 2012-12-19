@@ -17,9 +17,10 @@ angular.module('productServices', ['ngResource'], function($provide) {
 		$provide.factory('Profile', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/profiles/' , {}, {
 		    	query : {method:'GET', params:{}, isArray:false, encoding:true, uri: 'GET/profiles/'},
+		    	update: {method:'PUT', params:{}, encoding:true, uri: 'PUT/profiles/'}		    	
 		    });
 		    
-		    resource = TokenHandler.wrapActions( resource, ["query"] , ["GET/profiles/"]);
+		    resource = TokenHandler.wrapActions( resource, ["query","update"] , ["GET/profiles/","PUT/profiles/"]);
 
   			return resource;
 		});

@@ -9,6 +9,8 @@ GET 	/assets/rest/connect				controllers.Application.connect(authtoken:String)
 
 GET 	/assets/proxy/*fullUrl			controllers.Application.proxy(fullUrl: String)
 
+PUT 	/assets/proxy/*fullUrl			controllers.Application.proxyPut(fullUrl: String)
+
 #GET 	/assets/phones/:phoneId			controllers.Application.phones(phoneId: String)
 
 

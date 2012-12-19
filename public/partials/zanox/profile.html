@@ -50,7 +50,7 @@
 							können.</p>
 					</div>
 					<div class="settingsForm">
-						<form id="contact" enctype="application/x-www-form-urlencoded" class="accountContactForm disableOnSubmit"
+						<form ng-model="profile" id="contact" enctype="application/x-www-form-urlencoded" class="accountContactForm disableOnSubmit"
 							action="" method="post">
 							<dl class="zend_form">
 								<dt id="title-label">
@@ -70,19 +70,19 @@
 									<label for="firstName" class="required">Vorname</label>
 								</dt>
 								<dd id="firstName-element">
-									<input name="firstName" id="firstName" value="{{profile.profileItem[0].firstname}}" type="text">
+									<input name="firstName" id="firstName" ng-model="profile.profileItem[0].firstName" type="text">
 								</dd>
 								<dt id="lastName-label">
 									<label for="lastName" class="required">Nachname</label>
 								</dt>
 								<dd id="lastName-element">
-									<input name="lastName" id="lastName" value="{{profile.profileItem[0].lastName}}" type="text">
+									<input name="lastName" id="lastName" ng-model="profile.profileItem[0].lastName" type="text">
 								</dd>
 								<dt id="company-label">
 									<label for="company" class="required">Firma/Publisher</label>
 								</dt>
 								<dd id="company-element">
-									<input name="company" id="company" value="{{profile.profileItem[0].company}}" type="text">
+									<input name="company" id="company" ng-model="profile.profileItem[0].company" type="text">
 								</dd>
 								<dt id="addressType-label">
 									<label for="addressType" class="required">Adressentyp</label>
@@ -109,13 +109,13 @@
 									<label for="address3" class="required">Straße</label>
 								</dt>
 								<dd id="address3-element">
-									<input name="address3" id="address3" value="{{profile.profileItem[0].street}}" type="text">
+									<input name="address3" id="address3" ng-model="profile.profileItem[0].street" type="text">
 								</dd>
 								<dt id="city-label">
 									<label for="city" class="required">Ort</label>
 								</dt>
 								<dd id="city-element">
-									<input name="city" id="city" value="{{profile.profileItem[0].city}}" type="text">
+									<input name="city" id="city" ng-model="profile.profileItem[0].city" type="text">
 								</dd>
 								<dt id="county-label">
 									<label for="county" class="required">Bundesland</label>
@@ -388,7 +388,7 @@
 									<label for="telephone" class="optional">Telefonnummer</label>
 								</dt>
 								<dd id="telephone-element">
-									<input name="telephone" id="telephone" type="text">
+									<input name="telephone" id="telephone" type="text" ng-model="profile.profileItem[0].mobile" nullIfEmpty />
 									<div class="tooltipRight">
 										<img class="pointer" src="contact-Dateien/help.png" alt=""> <span class="tooltipRightContent"> <span
 											class="tooltipRightArrow"></span>Please provide telephone number in international format, for example,
@@ -400,7 +400,7 @@
 									<label for="mobile" class="optional">Mobiltelefonnummer</label>
 								</dt>
 								<dd id="mobile-element">
-									<input name="mobile" id="mobile" value="{{profile.profileItem[0].phone}}" type="text">
+									<input name="mobile" id="mobile" ng-model="profile.profileItem[0].phone" type="text">
 									<div class="tooltipRight">
 										<img class="pointer" src="contact-Dateien/help.png" alt=""> <span class="tooltipRightContent"> <span
 											class="tooltipRightArrow"></span>Please provide mobile number in international format, for example,
@@ -412,7 +412,7 @@
 									<label for="email" class="required">Primäre E-Mail</label>
 								</dt>
 								<dd id="email-element">
-									<input name="email" id="email" value="{{profile.profileItem[0].email}}" type="text">
+									<input name="email" id="email" ng-model="profile.profileItem[0].email" type="text">
 								</dd>
 								<dt id="imTypeId-label">
 									<label for="imTypeId" class="optional">IM-Typ</label>
@@ -454,14 +454,12 @@
 									<input name="formName" value="contact" id="formName" type="hidden">
 								</dd>
 								<dd id="formaccountsettingscontactupdateDetails-element">
-									<button name="formaccountsettingscontactupdateDetails" id="form.account.settings.contact.updateDetails"
+									<button ng-click="update(profile)" name="formaccountsettingscontactupdateDetails" id="form.account.settings.contact.updateDetails"
 										type="submit" class="orange">
 										<span>Details aktualisieren</span>
 									</button>
 								</dd>
 
-								<input name="sessionToken" value="69eab2f2285ff51cc76f01805feaaba4348e628a" id="sessionToken" type="hidden">
-							</dl>
 						</form>
 					</div>
 				</div>

@@ -61,6 +61,9 @@ function ConnectCtrl($scope, $routeParams, $rootScope, Connect, $location, $wind
 
 function ProfileCtrl($scope, $rootScope, Profile) {
 	$rootScope.profile = Profile.query();
+	$scope.update = function(profile){
+		Profile.update({profileItem:profile.profileItem[0]});
+	}
 }
 
 function BalanceCtrl($scope, $rootScope, Balance) {
