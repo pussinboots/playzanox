@@ -38,9 +38,7 @@ function getQueryVar(varName){
 	return val == queryStr ? false : val;
 }
 
-function ConnectCtrl($scope, $routeParams, $rootScope, Connect, $location, $window) {
-	$scope.$location = $location;
-	$scope.$window = $window;
+function ConnectCtrl($scope, $routeParams, $rootScope, Connect) {
 	$scope.$watch('(location.search()).authtoken', function($routeParams) {
 
 		var authtoken = getQueryVar('authtoken');

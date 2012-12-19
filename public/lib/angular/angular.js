@@ -4920,7 +4920,6 @@ function LocationUrl(url, pathPrefix) {
     if (match.path.indexOf(pathPrefix) !== 0) {
       throw Error('Invalid url "' + url + '", missing path prefix "' + pathPrefix + '" !');
     }
-throw Error('Invalid url "' + url + '", missing path prefix "' + pathPrefix + '" !');
     this.$$path = decodeURIComponent(match.path.substr(pathPrefix.length));
     this.$$search = parseKeyValue(match.search);
     this.$$hash = match.hash && decodeURIComponent(match.hash) || '';
@@ -4937,12 +4936,8 @@ throw Error('Invalid url "' + url + '", missing path prefix "' + pathPrefix + '"
         hash = this.$$hash ? '#' + encodeUriSegment(this.$$hash) : '';
 
     this.$$url = encodePath(this.$$path) + (search ? '?' + search : '') + hash;
-    alert(composeProtocolHostPort(this.$$protocol, this.$$host, this.$$port) +
-                    pathPrefix + this.$$url);
     this.$$absUrl = composeProtocolHostPort(this.$$protocol, this.$$host, this.$$port) +
                     pathPrefix + this.$$url;
-                    
-                    asdad
   };
 
   this.$$parse(url);

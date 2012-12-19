@@ -1,5 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="de" ng-app="zanox">
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="fragment" content="#" />
@@ -10,27 +14,34 @@
 <link href="images/zanox/combine.css" media="screen" rel="stylesheet" type="text/css">
 <link href="images/zanox/combine_002.css" media="screen" rel="stylesheet" type="text/css">
 <link href="images/zanox/combine_003.css" media="print" rel="stylesheet" type="text/css">
+ ﻿<!--[if lte IE 8]>
+    <script>
+      document.createElement('tabs');
+      document.createElement('pane');
+      document.createElement('ng-pluralize');
+    </script>
+  <![endif]-->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-<script src="lib/angular/angular.js"></script>
-<script src="js/zanox/app.js"></script>
-<script src="js/zanox/directives/datepicker.js"></script>
-<script src="js/zanox/directives/ahighchart.js"></script>
-<script src="js/zanox/directives/nullifempty.js"></script>
-<script src="js/zanox/controllers.js"></script>
-<script src="js/zanox/filters.js"></script>
-<script src="js/zanox/services.js"></script>
-<script src="lib/angular/angular-resource.js"></script>
-<script src="js/offline/hmac-sha1.js"></script>
-<script src="js/offline/enc-base64-min.js"></script>
-<script type='text/javascript' src="js/offline/charts.js"></script>
-<script src="js/offline/awesomechart.js"></script>
-<script src="js/offline/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/offline/highcharts.js"></script>
+<script src="http://localhost:9000/assets/lib/angular/angular.js"></script>
+<script src="http://localhost:9000/assets/js/zanox/app.js"></script>
+<script src="http://localhost:9000/assets/js/zanox/directives/datepicker.js"></script>
+<script src="http://localhost:9000/assets/js/zanox/directives/ahighchart.js"></script>
+<script src="http://localhost:9000/assets/js/zanox/directives/nullifempty.js"></script>
+<script src="http://localhost:9000/assets/js/zanox/controllers.js"></script>
+<script src="http://localhost:9000/assets/js/zanox/filters.js"></script>
+<script src="http://localhost:9000/assets/js/zanox/services.js"></script>
+<script src="http://localhost:9000/assets/lib/angular/angular-resource.js"></script>
+<script src="http://localhost:9000/assets/js/offline/hmac-sha1.js"></script>
+<script src="http://localhost:9000/assets/js/offline/enc-base64-min.js"></script>
+<script type='text/javascript' src="http://localhost:9000/assets/js/offline/charts.js"></script>
+<script src="http://localhost:9000/assets/js/offline/awesomechart.js"></script>
+<script src="http://localhost:9000/assets/js/offline/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://localhost:9000/assets/js/offline/highcharts.js"></script>
 
 </head>
-<body class="zanox flexible">
+<body ng-app="zanox" ng-controller="ConnectCtrl" class="zanox flexible">
 	<div id="container">
 		<div id="header">
 			<div id="headerLogo">
@@ -145,7 +156,7 @@
 	<a href="#/report">Reports (Highchart)</a> |
 	<a href="#/reportawe">Reports (Awesomechart)</a> ]
 	<hr />-->
-		<div id="content" ng-view ng-controller="ConnectCtrl"></div>
+		<div id="content" ng-view ></div>
 	</div>
 </body>
 </html>

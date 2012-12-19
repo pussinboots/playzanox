@@ -2,7 +2,7 @@
 
 /* App Module */
 //'ui.directives.date',
-angular.module('zanox', ['NullIfEmpty', 'DatePicker', 'productFilters', 'productServices', 'AwesomeChartJS', 'HighchartJs' ]).config([ '$routeProvider', function($routeProvider) {
+angular.module('zanox', ['NullIfEmpty', 'DatePicker', 'productFilters', 'productServices', 'AwesomeChartJS', 'HighchartJs' ]).config(function($routeProvider) {
 	$routeProvider.when('/dashboard', { templateUrl : 'partials/zanox/dashboard.html', controller : DashBoardCtrl })
 	        .when('/products', { templateUrl : 'partials/zanox/product-list.html', controller : ProductListCtrl })
 	        .when('/profile', { templateUrl : 'partials/zanox/profile.html', controller : ProfileCtrl })
@@ -14,9 +14,9 @@ angular.module('zanox', ['NullIfEmpty', 'DatePicker', 'productFilters', 'product
 	        .when('/programapplication', { templateUrl : 'partials/zanox/programapplication.html', controller : ProgramApplicationsCtrl })
 	        .when('/product/:productId', { templateUrl : 'partials/zanox/product-detail.html', controller : ProductDetailCtrl })
 	        .otherwise({ redirectTo : '/dashboard' });
-} ]).config([ '$locationProvider', function($locationProvider) {
-	$locationProvider.html5Mode(false)
-} ]).run(function($rootScope, Menue, $compile) {
+}).config(function($locationProvider) {
+	//$locationProvider.html5Mode(true)
+}).run(function($rootScope, Menue, $compile) {
 	$rootScope.apikey = { "session" : { "connectId" : "580599047DF8F5311043", "secretKey" : "newURI", "sessionExpires" : "asdad", "sessionKey" : "asd" }};
 	
     $rootScope.global = Menue.query();
