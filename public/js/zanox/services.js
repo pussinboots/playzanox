@@ -6,7 +6,7 @@ angular.module('productServices', ['ngResource'], function($provide) {
 
 	  $provide.factory('Product', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/programs' , {}, {
-		    	query : {method:'GET', params:{}, isArray:false, encoding:true},
+		    	query : {method:'GET', params:{}, isArray:false, encoding:true}
 		    });
 		    
 		    resource = TokenHandler.wrapActions( resource, ["query", "update", "save"] );
@@ -27,7 +27,7 @@ angular.module('productServices', ['ngResource'], function($provide) {
 
 	    $provide.factory('Balance', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/payments/balances/' , {}, {
-		    	query : {method:'GET', params:{}, isArray:false, encoding:true},
+		    	query : {method:'GET', params:{}, isArray:false, encoding:true}
 		    });
 		    
 		    resource = TokenHandler.wrapActions( resource, ["query"] , ["GET/payments/balances/"]);
@@ -37,7 +37,7 @@ angular.module('productServices', ['ngResource'], function($provide) {
 		
 		$provide.factory('BankAccounts', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/payments/bankaccounts/' , {}, {
-		    	query : {method:'GET', params:{}, isArray:false, encoding:true},
+		    	query : {method:'GET', params:{}, isArray:false, encoding:true}
 		    });
 		    
 		    resource = TokenHandler.wrapActions( resource, ["query"] , ["GET/payments/bankaccounts/"]);
@@ -47,7 +47,7 @@ angular.module('productServices', ['ngResource'], function($provide) {
 		
 		$provide.factory('Adspace', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/adspaces/' , {}, {
-		    	query : {method:'GET', params:{}, isArray:false, encoding:true},
+		    	query : {method:'GET', params:{}, isArray:false, encoding:true}
 		    });
 		    
 		    resource = TokenHandler.wrapActions( resource, ["query"] , ["GET/adspaces/"]);
@@ -57,7 +57,7 @@ angular.module('productServices', ['ngResource'], function($provide) {
 		
 		$provide.factory('ProgramApplication', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/programapplications/' , {}, {
-		    	query : {method:'GET', params:{}, isArray:false, encoding:true},
+		    	query : {method:'GET', params:{}, isArray:false, encoding:true}
 		    });
 		    
 		    resource = TokenHandler.wrapActions( resource, ["query"] , ["GET/programapplications/"]);
@@ -66,7 +66,7 @@ angular.module('productServices', ['ngResource'], function($provide) {
 		});
 		$provide.factory('Report', function($resource, TokenHandler){
 		    var resource = $resource('/assets/proxy/https://api.zanox.com/json/2011-03-01/reports/basic/' , {}, {
-		    	query : {method:'GET', params:{}, isArray:false, encoding:true},
+		    	query : {method:'GET', params:{}, isArray:false, encoding:true}
 		    });
 		    
 		    resource = TokenHandler.wrapActions( resource, ["query"] , ["GET/reports/basic/"]);
