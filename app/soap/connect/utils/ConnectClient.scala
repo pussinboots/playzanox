@@ -23,7 +23,7 @@ object ConnectClient {
 
     connect.service.getSession(
         authToken, 
-        "D9E5219494DBF9D44831", 
+        "1B74C0A4E6EAC3AD90C4", 
         signature, 
         nonce, 
         timeStamp).right.get
