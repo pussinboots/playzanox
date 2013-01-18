@@ -16,7 +16,7 @@ angular.module('zanox', ['loadingOnAJAX', 'DatePicker', 'productFilters', 'produ
 }).config(function($locationProvider) {
 	//$locationProvider.html5Mode(true)
 }).run(function($rootScope, Menue, $compile) {
-	$rootScope.apikey = { "session" : { "connectId" : "580599047DF8F5311043", "secretKey" : "newURI", "sessionExpires" : "asdad", "sessionKey" : "asd" }};
+	$rootScope.apikey = { "session" : { "connectId" : "5AAE79147D89667EBD0F", "secretKey" : "newURI", "sessionExpires" : "asdad", "sessionKey" : "asd" }};
 	
     $rootScope.global = Menue.query();
     $rootScope.show = function(data) {
