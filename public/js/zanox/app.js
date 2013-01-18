@@ -1,7 +1,6 @@
 'use strict';
 
 /* App Module */
-//'ui.directives.date',
 angular.module('zanox', ['loadingOnAJAX', 'DatePicker', 'productFilters', 'productServices', 'AwesomeChartJS', 'HighchartJs' ]).config(function($routeProvider) {
 	$routeProvider.when('/dashboard', { templateUrl : 'partials/zanox/dashboard.html', controller : DashBoardCtrl })
 	        .when('/products', { templateUrl : 'partials/zanox/product-list.html', controller : ProductListCtrl })
@@ -49,34 +48,6 @@ angular.module('zanox', ['loadingOnAJAX', 'DatePicker', 'productFilters', 'produ
 		hash = CryptoJS.enc.Base64.stringify(hash);
 		return (hash);
 	};
-
-	// wraps given actions of a resource to send auth token
-	// with every request
-	tokenHandler.wrapActions = function(resource, actions) {
-		// copy original resource
-		var wrappedResource = resource;
-		// loop through actions and actually wrap them
-		for ( var i = 0; i < actions.length; i++) {
-			tokenWrapper(wrappedResource, actions[i]);
-		}
-		;
-		// return modified copy of resource
-		return wrappedResource;
-	};
-
-	/*// wraps resource action to send request with auth token
-	var tokenWrapper = function(resource, action) {
-		// copy original action
-		resource['_' + action] = resource[action];
-		// create new action wrapping the original
-		// and sending token
-		resource[action] = function(data, success, error) {
-			return resource['_' + action](
-			// call action with provided data and
-			// appended access_token
-			angular.extend({}, data || {}, { connectId : tokenHandler.getConnectId() }), success, error);
-		};
-	};*/
 
 	// wraps given actions of a resource to send auth token
 	// with every request
