@@ -13,12 +13,15 @@ function ProductListCtrl($scope, Product) {
 }
 
 function DashBoardCtrl($scope, $rootScope, Balance, BankAccounts, Profile) {
-
-	
 	var balances = Balance.query(); 
-	var accounts = BankAccounts.query(); 
-	 
-	$rootScope.profile = Profile.query();
+	var accounts = BankAccounts.query();
+	var profile = Profile.query({}, {}, function(result) {
+		var audioword = new Audio("http://imedia-ventures.com/taptospeak/test.php?q=Hello " + result.profileItem[0].firstName);
+    	audioword.play();
+    });
+    
+    $rootScope.profile = profile;
+	
 	$scope.dashboard = {balance:balances, account:accounts};
 }
 
@@ -52,9 +55,6 @@ function ConnectCtrl($scope, $routeParams, $rootScope, Connect, $location) {
 			});
 		}
 	}, true);
-	if ($routeParams.authtoken) {
-
-	}
 }
 
 function ProfileCtrl($scope, $rootScope, Profile) {
