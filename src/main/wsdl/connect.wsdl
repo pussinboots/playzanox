@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://auth.zanox.com/2010-02-01/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ConnectService"
+	targetNamespace="http://auth.zanox.com/2010-02-01/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://auth.zanox.com/2010-02-01/">
+			<xsd:element name="getSession">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="authToken" type="xsd:string"></xsd:element>
+						<xsd:element name="publicKey" type="xsd:string"></xsd:element>
+						<xsd:element name="signature" type="xsd:string"></xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="timestamp" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getSessionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="session" type="tns:sessionType"
+							minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="sessionType">
+				<xsd:sequence>
+					<xsd:element name="connectId" type="xsd:string"></xsd:element>
+					<xsd:element name="sessionKey" type="xsd:string"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="secretKey" type="xsd:string"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="sessionExpires" type="xsd:int"></xsd:element>
+					<xsd:element name="offlineToken" type="xsd:string"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="createConnectRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="applicationId"
+							type="xsd:string">
+						</xsd:element>
+						<xsd:element name="connectId"
+							type="xsd:string" minOccurs="0" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="loginId"
+							type="xsd:int" minOccurs="0" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="role" type="tns:roleType"
+							minOccurs="0" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="publicKey"
+							type="xsd:string">
+						</xsd:element>
+						<xsd:element name="timestamp"
+							type="xsd:string">
+						</xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="signature"
+							type="xsd:string">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createConnectResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="connectId" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:simpleType name="roleType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="DEVELOPER" />
+					<xsd:enumeration value="CUSTOMER" />
+					<xsd:enumeration value="TESTER" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:element name="getUiUrl">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="connectId" type="xsd:string"></xsd:element>
+						<xsd:element name="sessionKey" type="xsd:string"></xsd:element>
+						<xsd:element name="timestamp" type="xsd:string"></xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="signature" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getUiUrlResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="url" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SoapException">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="message" type="xsd:string"></xsd:element>
+						<xsd:element name="code" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="closeSession">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="connectId" type="xsd:string"></xsd:element>
+						<xsd:element name="publicKey" type="xsd:string"></xsd:element>
+						<xsd:element name="timestamp" type="xsd:string"></xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="signature" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="closeSessionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="promoteSessionRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="connectId" type="xsd:string"></xsd:element>
+						<xsd:element name="promoteType" type="tns:promoteTypeEnum"></xsd:element>
+						<xsd:element name="publicKey" type="xsd:string"></xsd:element>
+						<xsd:element name="timestamp" type="xsd:string"></xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="signature" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="promoteSessionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="wsSessionExpires" type="xsd:int"></xsd:element>
+						<xsd:element name="uiSessionExpires" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:simpleType name="promoteTypeEnum">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="UISESSION"></xsd:enumeration>
+					<xsd:enumeration value="WSSESSION"></xsd:enumeration>
+					<xsd:enumeration value="BOTH"></xsd:enumeration>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:element name="getOfflineSession">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="offlineToken" type="xsd:string"></xsd:element>
+						<xsd:element name="publicKey" type="xsd:string"></xsd:element>
+						<xsd:element name="signature" type="xsd:string"></xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="timestamp" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getOfflineSessionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="session" type="tns:sessionType"
+							minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="getSessionRequest">
+		<wsdl:part element="tns:getSession" name="getSession" />
+	</wsdl:message>
+	<wsdl:message name="getSessionResponse">
+		<wsdl:part element="tns:getSessionResponse" name="getSessionResponse" />
+	</wsdl:message>
+	<wsdl:message name="createConnectRequest">
+		<wsdl:part name="createConnectRequest" element="tns:createConnectRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createConnectResponse">
+		<wsdl:part name="createConnectResponse" element="tns:createConnectResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getUiUrlRequest">
+		<wsdl:part name="getUiUrl" element="tns:getUiUrl"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getUiUrlResponse">
+		<wsdl:part name="getUiUrlResponse" element="tns:getUiUrlResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="SoapException">
+		<wsdl:part name="SoapException" element="tns:SoapException"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="closeSessionRequest">
+		<wsdl:part name="closeSession" element="tns:closeSession"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="closeSessionResponse">
+		<wsdl:part name="closeSessionResponse" element="tns:closeSessionResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="promoteSessionRequest">
+		<wsdl:part name="promoteSessionRequest" element="tns:promoteSessionRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="promoteSessionResponse">
+		<wsdl:part name="promoteSessionResponse" element="tns:promoteSessionResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getOfflineSessionRequest">
+		<wsdl:part name="getOfflineSession" element="tns:getOfflineSession"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getOfflineSessionResponse">
+		<wsdl:part name="getOfflineSessionResponse" element="tns:getOfflineSessionResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ConnectServicePortType">
+		<wsdl:operation name="closeSession">
+			<wsdl:input message="tns:closeSessionRequest"></wsdl:input>
+			<wsdl:output message="tns:closeSessionResponse"></wsdl:output>
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createConnect">
+			<wsdl:input message="tns:createConnectRequest"></wsdl:input>
+			<wsdl:output message="tns:createConnectResponse"></wsdl:output>
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getOfflineSession">
+			<wsdl:input message="tns:getOfflineSessionRequest"></wsdl:input>
+			<wsdl:output message="tns:getOfflineSessionResponse"></wsdl:output>
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getSession">
+			<wsdl:input message="tns:getSessionRequest" />
+			<wsdl:output message="tns:getSessionResponse" />
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getUiUrl">
+			<wsdl:input message="tns:getUiUrlRequest"></wsdl:input>
+			<wsdl:output message="tns:getUiUrlResponse"></wsdl:output>
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="promoteSession">
+			<wsdl:input message="tns:promoteSessionRequest"></wsdl:input>
+			<wsdl:output message="tns:promoteSessionResponse"></wsdl:output>
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ConnectServiceBinding" type="tns:ConnectServicePortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="closeSession">
+			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/closeSession" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createConnect">
+			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/createConnect" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getOfflineSession">
+			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/getOfflineSession" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getSession">
+			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/getSession" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getUiUrl">
+			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/getUiUrl" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="promoteSession">
+			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/promoteSession" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ConnectService">
+		<wsdl:port binding="tns:ConnectServiceBinding" name="ConnectServicePort">
+        <soap:address location="https://auth.zanox-affiliate.de/soap/2010-02-01" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
