@@ -1,12 +1,15 @@
-language: scala # to trigger the build on JVM worker ('language: java' works the same)
-env:
-  - PLAY_VERSION=2.0.4 # Latest 2.1.x
-before_script: 
-  - wget http://downloads.typesafe.com/releases/play-2.0.4.zip
-  - unzip -q play-${PLAY_VERSION}.zip 
+language: scala
 script: play-${PLAY_VERSION}/play test
-notifications:
-  # Email notifications are disabled to not annoy anybody.
-  # See http://about.travis-ci.org/docs/user/build-configuration/ to learn more
-  # about configuring notification recipients and more.
+env: 
+- PLAY_VERSION=2.0.4
+before_script: 
+- wget http://downloads.typesafe.com/releases/play-2.0.4.zip
+- unzip -q play-${PLAY_VERSION}.zip
+deploy: 
+  app: playzanox
+  strategy: git
+  provider: heroku
+  api_key: 
+    secure: FHqnLPlUudsL7OrQiWp1NULQGmsuOG97nKuMgsBtwR9YKvEzDWggtAvHnCQ3HEoJk9xyxYlqFazbiDdf5YPHyTRfIWEBcfqYwltVxuizcu0DT174WkoWko91NW0kKXvc+6QJwRzZQ2vrHXuo5JaLsOMMMsJb7uyfCN5O6y4aJGY=
+notifications: 
   email: false
