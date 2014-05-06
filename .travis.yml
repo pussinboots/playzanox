@@ -6,6 +6,7 @@ before_script:
 - wget http://downloads.typesafe.com/releases/play-2.0.4.zip
 - unzip -q play-${PLAY_VERSION}.zip
 deploy:
+  strategy: git
   on:
     all_branches: true
   provider: heroku 
