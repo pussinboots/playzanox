@@ -5,10 +5,10 @@ env:
 before_script: 
 - wget http://downloads.typesafe.com/releases/play-2.0.4.zip
 - unzip -q play-${PLAY_VERSION}.zip
-deploy: 
+deploy:
+  provider: heroku 
   app: playzanox
   strategy: git
-  provider: heroku
   api_key: 
     secure: FHqnLPlUudsL7OrQiWp1NULQGmsuOG97nKuMgsBtwR9YKvEzDWggtAvHnCQ3HEoJk9xyxYlqFazbiDdf5YPHyTRfIWEBcfqYwltVxuizcu0DT174WkoWko91NW0kKXvc+6QJwRzZQ2vrHXuo5JaLsOMMMsJb7uyfCN5O6y4aJGY=
 after_deploy:
