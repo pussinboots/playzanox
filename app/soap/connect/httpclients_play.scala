@@ -8,15 +8,13 @@ trait PlayHttpClients extends HttpClients {
 
   trait PlayHttpClient extends HttpClient {
 
-    def request(in: String, address: java.net.URI, headers: Map[String, String]): String = {
-//      val ws = WS.url("http://stackoverflow.com")
-//      headers.map { case(key, value) =>
-//        ws.setHeader(key, value)
-//      }
-//      //ws.post(in).get().getBody()
-//      ws.get().get().getBody()
-//      
-      "Hallo"
+    def request(webMethod: String, in: String, address: java.net.URI, headers: Map[String, String]): String = {
+      val ws = WS.url(address.toString())
+      headers.map { case(key, value) =>
+        ws.setHeader(key, value)
+      }
+      //ws.post(in).get().getBody()
+      ws.post(in).get().getBody()
     }
   }
 }
