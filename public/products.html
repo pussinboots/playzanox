@@ -4,12 +4,11 @@
 <meta charset="utf-8">
 <meta name="fragment" content="#" />
 <title>Mini Zanox</title>
-<link rel="stylesheet" href="css/zanox/main.css">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/bootstrap.css">
-<link href="images/zanox/combine.css" media="screen" rel="stylesheet" type="text/css">
-<link href="images/zanox/combine_002.css" media="screen" rel="stylesheet" type="text/css">
-<link href="images/zanox/combine_003.css" media="print" rel="stylesheet" type="text/css">
+<link href="css/zanox/combine.css" media="screen" rel="stylesheet" type="text/css">
+<link href="css/zanox/global.css" media="screen" rel="stylesheet" type="text/css">
+<link href="css/zanox/publisher.startpage.css" media="screen" rel="stylesheet" type="text/css">
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type='text/javascript'></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type='text/javascript'></script>
@@ -35,7 +34,7 @@
 <![endif]-->
 
 </head>
-<body class="zanox flexible">
+<body>
 	<!--[if lte IE 6]>
     <div id="ie6" class="ie6">
     <![endif]-->
@@ -45,97 +44,101 @@
 	<!--[if gt IE 7]>
     <div id="ie8">
     <![endif]-->
+    
+    
 
-	<div id="container">
-		<div id="header">
-			<div id="headerLogo">
-				<a href="https://marketplace.zanox.com/user/activity-stream/index/category/events"> <img src="images/zanox/zanox_marketplace_logo.jpg"
-					alt="zanox Marketplace Logo" title="zanox Marketplace Logo"></a>
-			</div>
-			<div id="headerNav">
-
-				<div id="dateBar">
-					<div id="dateTime">
-						<span id="dateTimeDisplay"></span>Hello <strong>{{profile.profileItem[0].firstName}}</strong>
-					</div>
-					<div id="controlPanelLinks">
-						<a href="mailto:service.de@zanox.com"> Kontakt </a> | <a target="_blank" href="http://help.zanox.com/"> Hilfe </a> | <a
-							href="https://marketplace.zanox.com/logout"> Log-out </a> | <img src="images/zanox/de_DE.png"> <a id="userLocale" href="javascript:void(0)">Deutsch</a>
-					</div>
+	<div id="darwinStartPageMainContainer">
+		<div id="zx-gwt-header" style="padding: 0px 10px; min-height: 180px; height: auto; margin-bottom: 10px;" class="darwinHeader zanoxPage">
+			<div id="header" class="darwinHeader">
+				<div id="headerLogo" class="darwinHeader">
+					<a href="https://marketplace.zanox.com/user/activity-stream/index/category/events"> <img src="images/zanox/zanox_marketplace_logo.jpg"
+						alt="zanox Marketplace Logo" title="zanox Marketplace Logo"></a>
 				</div>
-				<ul id="controlPanelButtons">
-					<li id="userHome"><a id="home" title="Ihre marketplace Accounts" href="https://auth.zanox.com/login?dest=dashboard&appid=C9957AB408F96B134AD0"> <span
-							class="hidden">Ihre marketplace Accounts</span>
-					</a>
-						<ul id="subMenu">
-							<li><a href="https://marketplace.zanox.com/user" id="dash-board"> Account-Übersicht</a></li>
-							<li><a href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/contact?connectid=F78BD644A51B90AB43FC" id="homepage" class="empty">
-									Als Startseite </a></li>
-						</ul></li>
-					<li id="activity"><a id="activityStream"> </a></li>
-					<li id="settingsCog"><a id="settings" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings" title="Settings">Einstellungen</a>
-						<ul id="settingsMenu" style="display: none;">
-							<li>marketplace Account
-								<ul>
-									<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/details">Benutzerdetails</a></li>
-									<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/accounts">Accounts verwalten</a></li>
-									<li><a class="arrow" href="https://auth.zanox.com/login?appid=0EC8CDE4B4C95801E803&amp;dest=changePassword&amp;publisher=446028">Passwort
-											ändern</a></li>
-								</ul>
-							</li>
-							<li>Publisher-Account
-								<ul>
-									<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/contact">Account-Kontakt</a></li>
-									<li><a class="arrow" href="https://auth.zanox.com/login?appid=0EC8CDE4B4C95801E803&amp;dest=accountInformation&amp;publisher=446028">Auszahlung</a></li>
-								</ul>
-							</li>
-							<li>Berechtigungen/Privatsphäre
-								<ul>
-									<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/privacy-account-users">Account-Benutzer anzeigen</a></li>
-									<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/privacy-contact-details">Account-Kontaktdetails</a></li>
-									<li><a class="arrow" href="https://auth.zanox.com/login?appid=0EC8CDE4B4C95801E803&amp;dest=subloginManagement&amp;publisher=446028">Benutzerlogins
-											verwalten</a></li>
-								</ul>
-							</li>
-						</ul></li>
-				</ul>
-
-
-				<li id="accountSwitcher">
-					<div id="accountSwitcherArrow">
-						<span class="account zanox" id="affiliateAccount"> <a class="affiliateAccount" href="https://marketplace.zanox.com/zanox/affiliate/446028"
-							target="_top"><span id="affiliate"><strong>Firma</strong></span></a>
-						</span>
-					</div>
-					<ul style="display: none;" class="accountList" id="cpAccountList">
-					</ul>
-				</li>
-
-			</div>
-			<div id="headerLines"></div>
-		</div>
-		<!-- dynamic rendering of the menu based on the menues.json file see public/global/menues.json and the Menue service see services.js -->
-		<div id="mainNav">
-			<ul id="navOne">
-				<li ng-repeat="menu in global.menues" class="topNav">
-					<div>
-						<a class="mainNav orange" href="{{menu.link}}">{{menu.name}}</a>
-						<div class="sectionNavigationDropdown">
-							<ul class="settingsIndex">
-								<li><div class="sub-mainnavitem-1 sub-mainnavitem-1-hassubs">{{menu.name}}</div></li>
-								<li class="">
-									<ul class="sub-mainnavitem-2">
-										<li ng-repeat="submenu in menu.submenues" class="sub-mainnavitem-2 sub-mainnavitem-2-nosubs"><a
-											class="sub-mainnavitem-2 sub-mainnavitem-2-nosubs" href="{{submenu.link}}">{{submenu.name}}</a></li>
-									</ul>
-								</li>
-							</ul>
+				<div class="headerNav">
+	
+					<div id="dateBar">
+						<div id="dateTime">
+							<span id="dateTimeDisplay"></span>Hello <strong>{{profile.profileItem[0].firstName}}</strong>
+						</div>
+						<div id="controlPanelLinks">
+							<a href="mailto:service.de@zanox.com"> Kontakt </a> | <a target="_blank" href="http://help.zanox.com/"> Hilfe </a> | <a
+								href="https://marketplace.zanox.com/logout"> Log-out </a> | <img src="images/zanox/de_DE.png"> <a id="userLocale" href="javascript:void(0)">Deutsch</a>
 						</div>
 					</div>
-				</li>
-				<li class="helpnavitem mainnavitem"><a target="_blank" href="http://help.zanox.com/?connectid={{apikey.session.connectId}}&amp;LANG=de"
-					class="helpnavitem mainnavitem">Hilfe</a></li>
-			</ul>
+					<ul id="controlPanelButtons">
+						<li id="userHome"><a id="home" title="Ihre marketplace Accounts" href="https://auth.zanox.com/login?dest=dashboard&appid=C9957AB408F96B134AD0"> <span
+								class="hidden">Ihre marketplace Accounts</span>
+						</a>
+							<ul id="subMenu">
+								<li><a href="https://marketplace.zanox.com/user" id="dash-board"> Account-Übersicht</a></li>
+								<li><a href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/contact?connectid=F78BD644A51B90AB43FC" id="homepage" class="empty">
+										Als Startseite </a></li>
+							</ul></li>
+						<li id="activity"><a id="activityStream"> </a></li>
+						<li id="settingsCog"><a id="settings" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings" title="Settings">Einstellungen</a>
+							<ul id="settingsMenu" style="display: none;">
+								<li>marketplace Account
+									<ul>
+										<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/details">Benutzerdetails</a></li>
+										<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/accounts">Accounts verwalten</a></li>
+										<li><a class="arrow" href="https://auth.zanox.com/login?appid=0EC8CDE4B4C95801E803&amp;dest=changePassword&amp;publisher=446028">Passwort
+												ändern</a></li>
+									</ul>
+								</li>
+								<li>Publisher-Account
+									<ul>
+										<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/contact">Account-Kontakt</a></li>
+										<li><a class="arrow" href="https://auth.zanox.com/login?appid=0EC8CDE4B4C95801E803&amp;dest=accountInformation&amp;publisher=446028">Auszahlung</a></li>
+									</ul>
+								</li>
+								<li>Berechtigungen/Privatsphäre
+									<ul>
+										<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/privacy-account-users">Account-Benutzer anzeigen</a></li>
+										<li><a class="arrow" href="https://marketplace.zanox.com/zanox/affiliate/446028/settings/privacy-contact-details">Account-Kontaktdetails</a></li>
+										<li><a class="arrow" href="https://auth.zanox.com/login?appid=0EC8CDE4B4C95801E803&amp;dest=subloginManagement&amp;publisher=446028">Benutzerlogins
+												verwalten</a></li>
+									</ul>
+								</li>
+							</ul></li>
+					</ul>
+	
+	
+					<li id="accountSwitcher">
+						<div id="accountSwitcherArrow">
+							<span class="account zanox" id="affiliateAccount"> <a class="affiliateAccount" href="https://marketplace.zanox.com/zanox/affiliate/446028"
+								target="_top"><span id="affiliate"><strong>Firma</strong></span></a>
+							</span>
+						</div>
+						<ul style="display: none;" class="accountList" id="cpAccountList">
+						</ul>
+					</li>
+	
+				</div>
+				<div class="headerLines"></div>
+			</div>
+			<!-- dynamic rendering of the menu based on the menues.json file see public/global/menues.json and the Menue service see services.js -->
+			<div id="mainNav">
+				<ul id="navOne">
+					<li ng-repeat="menu in global.menues" class="topNav">
+						<div>
+							<a class="mainNav orange" href="{{menu.link}}">{{menu.name}}</a>
+							<div class="sectionNavigationDropdown">
+								<ul class="settingsIndex">
+									<li><div class="sub-mainnavitem-1 sub-mainnavitem-1-hassubs">{{menu.name}}</div></li>
+									<li class="">
+										<ul class="sub-mainnavitem-2">
+											<li ng-repeat="submenu in menu.submenues" class="sub-mainnavitem-2 sub-mainnavitem-2-nosubs"><a
+												class="sub-mainnavitem-2 sub-mainnavitem-2-nosubs" href="{{submenu.link}}">{{submenu.name}}</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="helpnavitem mainnavitem"><a target="_blank" href="http://help.zanox.com/?connectid={{apikey.session.connectId}}&amp;LANG=de"
+						class="helpnavitem mainnavitem">Hilfe</a></li>
+				</ul>
+			</div>
 		</div>
 		<!--<div ng-include src="'partials/zanox/menue.html'"></div>-->
 
@@ -148,7 +151,7 @@
 	<a href="#/report">Reports (Highchart)</a> |
 	<a href="#/reportawe">Reports (Awesomechart)</a> ]
 	<hr />-->
-		<div id="content" ng-view ng-controller="ConnectCtrl"></div>
+		<div class="mainContentContainer" ng-view ng-controller="ConnectCtrl"></div>
 	</div>
 	<!--[if IE]>
     </div>
