@@ -1,0 +1,16 @@
+language: scala
+script: play-${PLAY_VERSION}/play test
+env: 
+- PLAY_VERSION=2.0.4
+before_script: 
+- wget http://downloads.typesafe.com/releases/play-2.0.4.zip
+- unzip -q play-${PLAY_VERSION}.zip
+deploy:
+  strategy: git
+  on:
+    master: designed
+  provider: heroku 
+  app: playzanox
+  api_key: 
+    secure: FHqnLPlUudsL7OrQiWp1NULQGmsuOG97nKuMgsBtwR9YKvEzDWggtAvHnCQ3HEoJk9xyxYlqFazbiDdf5YPHyTRfIWEBcfqYwltVxuizcu0DT174WkoWko91NW0kKXvc+6QJwRzZQ2vrHXuo5JaLsOMMMsJb7uyfCN5O6y4aJGY=
+
