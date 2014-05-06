@@ -8,7 +8,7 @@ before_script:
 deploy:
   strategy: git
   on:
-    all_branches: true
+    master: designed
   provider: heroku 
   app: playzanox
   api_key: 
