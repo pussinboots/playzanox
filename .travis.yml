@@ -1,9 +1,0 @@
-language: scala
-deploy: 
-  provider: heroku
-  app: playzanox
-  api_key: 
-    secure: HCAll9EC+kHXrY5cI5SAO9ve7qu4+bYpHhia/7Js9nt7uBdxsbXtKu7KPJmiB5hCz4wHhIxMHM5xsIXPfX1nBwCzlwYySUEsD1+ABdFSF4ipsaKrecMQ9PJ1KcGtXRij06LElHa7KJYW/0/w+OzBCq2YWCFKCSAPGStOCiIL+tY=
-scala: 
-- 2.10.1
-- 2.9.3
