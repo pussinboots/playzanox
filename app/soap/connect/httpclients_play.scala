@@ -10,10 +10,7 @@ trait PlayHttpClients extends HttpClients {
     import dispatch._
 
     def request(in: String, address: java.net.URI, headers: Map[String, String]): String = {
-      val req = url(address.toString) << in <:< headers
-      val s = Http(req OK as.String)
-      s()
-      val ws = WS.url("http://stackoverflow.com/")
+      val ws = WS.url(address.toString)
       headers.map { case(key, value) =>
         ws.setHeader(key, value)
       }
