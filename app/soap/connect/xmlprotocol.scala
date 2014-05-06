@@ -9,7 +9,7 @@ val document = scalaxb.toXML[soap.connect.Foo](obj, "foo", soap.connect.defaultS
 object `package` extends XMLProtocol { }
 
 trait XMLProtocol extends scalaxb.XMLStandardTypes {
-  val defaultScope = scalaxb.toScope(Some("tns") -> "http://auth.zanox.com/2010-02-01/",
+  val defaultScope = scalaxb.toScope(Some("tns") -> "http://auth.zanox.com/2011-05-01/",
     Some("xs") -> "http://www.w3.org/2001/XMLSchema",
     Some("xsi") -> "http://www.w3.org/2001/XMLSchema-instance")
   implicit lazy val ConnectGetSessionFormat: scalaxb.XMLFormat[soap.connect.GetSession] = new DefaultConnectGetSessionFormat {}
@@ -30,7 +30,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   implicit lazy val ConnectGetOfflineSessionResponseFormat: scalaxb.XMLFormat[soap.connect.GetOfflineSessionResponse] = new DefaultConnectGetOfflineSessionResponseFormat {}
 
   trait DefaultConnectGetSessionFormat extends scalaxb.ElemNameParser[soap.connect.GetSession] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetSession] =
       phrase((scalaxb.ElemName(None, "authToken")) ~ 
@@ -55,7 +55,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectGetSessionResponseFormat extends scalaxb.ElemNameParser[soap.connect.GetSessionResponse] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetSessionResponse] =
       phrase(opt(scalaxb.ElemName(None, "session")) ^^
@@ -68,7 +68,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectSessionTypeFormat extends scalaxb.ElemNameParser[soap.connect.SessionType] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     override def typeName: Option[String] = Some("sessionType")
 
@@ -95,7 +95,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectCreateConnectRequestFormat extends scalaxb.ElemNameParser[soap.connect.CreateConnectRequest] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.CreateConnectRequest] =
       phrase((scalaxb.ElemName(None, "applicationId")) ~ 
@@ -129,7 +129,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectCreateConnectResponseFormat extends scalaxb.ElemNameParser[soap.connect.CreateConnectResponse] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.CreateConnectResponse] =
       phrase((scalaxb.ElemName(None, "connectId")) ^^
@@ -143,7 +143,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
 
   def buildConnectRoleTypeFormat = new DefaultConnectRoleTypeFormat {}
   trait DefaultConnectRoleTypeFormat extends scalaxb.XMLFormat[soap.connect.RoleType] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.RoleType] =
       Right(soap.connect.RoleType.fromString(seq.text))
@@ -156,7 +156,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectGetUiUrlFormat extends scalaxb.ElemNameParser[soap.connect.GetUiUrl] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetUiUrl] =
       phrase((scalaxb.ElemName(None, "connectId")) ~ 
@@ -181,7 +181,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectGetUiUrlResponseFormat extends scalaxb.ElemNameParser[soap.connect.GetUiUrlResponse] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetUiUrlResponse] =
       phrase((scalaxb.ElemName(None, "url")) ^^
@@ -194,7 +194,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectSoapExceptionFormat extends scalaxb.ElemNameParser[soap.connect.SoapException] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.SoapException] =
       phrase((scalaxb.ElemName(None, "message")) ~ 
@@ -210,7 +210,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectCloseSessionFormat extends scalaxb.ElemNameParser[soap.connect.CloseSession] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.CloseSession] =
       phrase((scalaxb.ElemName(None, "connectId")) ~ 
@@ -235,7 +235,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectCloseSessionResponseFormat extends scalaxb.XMLFormat[soap.connect.CloseSessionResponse] with scalaxb.CanWriteChildNodes[soap.connect.CloseSessionResponse] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.CloseSessionResponse] = seq match {
       case node: scala.xml.Node => Right(soap.connect.CloseSessionResponse())
@@ -249,7 +249,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectPromoteSessionRequestFormat extends scalaxb.ElemNameParser[soap.connect.PromoteSessionRequest] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.PromoteSessionRequest] =
       phrase((scalaxb.ElemName(None, "connectId")) ~ 
@@ -277,7 +277,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectPromoteSessionResponseFormat extends scalaxb.ElemNameParser[soap.connect.PromoteSessionResponse] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.PromoteSessionResponse] =
       phrase((scalaxb.ElemName(None, "wsSessionExpires")) ~ 
@@ -294,7 +294,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
 
   def buildConnectPromoteTypeEnumFormat = new DefaultConnectPromoteTypeEnumFormat {}
   trait DefaultConnectPromoteTypeEnumFormat extends scalaxb.XMLFormat[soap.connect.PromoteTypeEnum] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.PromoteTypeEnum] =
       Right(soap.connect.PromoteTypeEnum.fromString(seq.text))
@@ -307,7 +307,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectGetOfflineSessionFormat extends scalaxb.ElemNameParser[soap.connect.GetOfflineSession] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetOfflineSession] =
       phrase((scalaxb.ElemName(None, "offlineToken")) ~ 
@@ -332,7 +332,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   }
 
   trait DefaultConnectGetOfflineSessionResponseFormat extends scalaxb.ElemNameParser[soap.connect.GetOfflineSessionResponse] {
-    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetOfflineSessionResponse] =
       phrase(opt(scalaxb.ElemName(None, "session")) ^^
@@ -346,49 +346,49 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
 
 
   trait ConnectServiceBindings { this: scalaxb.Soap11Clients =>
-    lazy val targetNamespace: Option[String] = Some("http://auth.zanox.com/2010-02-01/")
+    lazy val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     lazy val service: soap.connect.ConnectServicePortType = new ConnectServiceBinding {}
-    def baseAddress = new java.net.URI("https://auth.zanox-affiliate.de/soap/2010-02-01")
+    def baseAddress = new java.net.URI("https://auth.zanox.com/soap/2011-05-01")
 
     trait ConnectServiceBinding extends soap.connect.ConnectServicePortType {
       def closeSession(connectId: String, publicKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.CloseSessionResponse] = 
-        soapClient.requestResponse(scalaxb.toXML(soap.connect.CloseSession(connectId, publicKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2010-02-01/"), "closeSession", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2010-02-01/closeSession"))) match {
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.CloseSession(connectId, publicKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "closeSession", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/closeSession"))) match {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.CloseSessionResponse](body.headOption getOrElse {body}))
         }
       def createConnect(applicationId: String, connectId: Option[String], loginId: Option[Int], role: Option[soap.connect.RoleType], publicKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], String] = 
-        soapClient.requestResponse(scalaxb.toXML(soap.connect.CreateConnectRequest(applicationId, connectId, loginId, role, publicKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2010-02-01/"), "createConnectRequest", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2010-02-01/createConnect"))) match {
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.CreateConnectRequest(applicationId, connectId, loginId, role, publicKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "createConnectRequest", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/createConnect"))) match {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.CreateConnectResponse](body.headOption getOrElse {body}).connectId)
         }
       def getOfflineSession(offlineToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetOfflineSessionResponse] = 
-        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetOfflineSession(offlineToken, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2010-02-01/"), "getOfflineSession", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2010-02-01/getOfflineSession"))) match {
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetOfflineSession(offlineToken, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2011-05-01/"), "getOfflineSession", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/getOfflineSession"))) match {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.GetOfflineSessionResponse](body.headOption getOrElse {body}))
         }
       def getSession(authToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetSessionResponse] = 
-        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetSession(authToken, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2010-02-01/"), "getSession", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2010-02-01/getSession"))) match {
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetSession(authToken, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2011-05-01/"), "getSession", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/getSession"))) match {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.GetSessionResponse](body.headOption getOrElse {body}))
         }
       def getUiUrl(connectId: String, sessionKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], String] = 
-        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetUiUrl(connectId, sessionKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2010-02-01/"), "getUiUrl", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2010-02-01/getUiUrl"))) match {
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetUiUrl(connectId, sessionKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "getUiUrl", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/getUiUrl"))) match {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.GetUiUrlResponse](body.headOption getOrElse {body}).url)
         }
       def promoteSession(connectId: String, promoteType: soap.connect.PromoteTypeEnum, publicKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.PromoteSessionResponse] = 
-        soapClient.requestResponse(scalaxb.toXML(soap.connect.PromoteSessionRequest(connectId, promoteType, publicKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2010-02-01/"), "promoteSessionRequest", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2010-02-01/promoteSession"))) match {
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.PromoteSessionRequest(connectId, promoteType, publicKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "promoteSessionRequest", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/promoteSession"))) match {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.PromoteSessionResponse](body.headOption getOrElse {body}))
