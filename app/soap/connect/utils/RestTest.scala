@@ -14,6 +14,6 @@ object RestTest {
 //	  profile.getProfileItem().setMobile(null);
 //	  api.updateProfile(profile.getProfileItem());
 //	  println(profile.getProfileItem().getMobile())
-    //ConnectClient.getSession("93552C44E3EBE1D283DD1B6450286D7F9E92F6A45639734CC2CF936C3456A301")
+    ConnectClient.getSession("33468654D4C838123868A5E47F399B61E9356754BE9AF2A4E88D337703733EC8")
   }
 }

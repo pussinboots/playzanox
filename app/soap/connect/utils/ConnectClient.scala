@@ -3,7 +3,7 @@ package soap.connect.utils
 
 import soap.connect.ConnectServiceBindings
 import scalaxb.Soap11Clients
-import scalaxb.DispatchHttpClients
+import scalaxb.PlayHttpClients
 import java.util.Calendar
 
 /**
@@ -15,7 +15,7 @@ object ConnectClient {
   val publicKey = System.getenv("publicKey");
   println("publicKey " + publicKey)
   //println("key " + secretKey)
-  val connect = new ConnectServiceBindings with Soap11Clients with DispatchHttpClients {}
+  val connect = new ConnectServiceBindings with Soap11Clients with PlayHttpClients {}
 
   def getSession(authToken: String): soap.connect.GetSessionResponse = {
 
