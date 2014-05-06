@@ -33,3 +33,7 @@ sbt eclipse with-source=true
 For Idea
 
 sbt idea with-sources
+
+Create Soap classes from wsdl with scalaxb (http://scalaxb.org/)
+
+scalaxb src/main/wsdl/connect.wsdl -d app/soap/connect -p soap.connect
