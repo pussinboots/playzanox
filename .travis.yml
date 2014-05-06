@@ -13,3 +13,5 @@ deploy:
     secure: FHqnLPlUudsL7OrQiWp1NULQGmsuOG97nKuMgsBtwR9YKvEzDWggtAvHnCQ3HEoJk9xyxYlqFazbiDdf5YPHyTRfIWEBcfqYwltVxuizcu0DT174WkoWko91NW0kKXvc+6QJwRzZQ2vrHXuo5JaLsOMMMsJb7uyfCN5O6y4aJGY=
 notifications: 
   email: false
+after_deploy:
+- wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
