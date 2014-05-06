@@ -22,3 +22,14 @@ To see the live demo go here http://playzanox.herokuapp.com/assets/products.html
 Continous Integration with travis https://travis-ci.org/pussinboots/playzanox/ .
 
 To use this live version you need a valid zanox publisher account.
+
+
+To start development.
+
+For Eclipse
+     
+sbt eclipse with-source=true
+    
+For Idea
+
+sbt idea with-sources
