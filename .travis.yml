@@ -8,7 +8,6 @@ before_script:
 deploy:
   provider: heroku 
   app: playzanox
-  strategy: git
   api_key: 
     secure: FHqnLPlUudsL7OrQiWp1NULQGmsuOG97nKuMgsBtwR9YKvEzDWggtAvHnCQ3HEoJk9xyxYlqFazbiDdf5YPHyTRfIWEBcfqYwltVxuizcu0DT174WkoWko91NW0kKXvc+6QJwRzZQ2vrHXuo5JaLsOMMMsJb7uyfCN5O6y4aJGY=
 after_deploy:
