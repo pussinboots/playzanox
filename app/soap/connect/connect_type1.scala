@@ -12,11 +12,29 @@ case class GetSession(authToken: String,
 case class GetSessionResponse(session: Option[soap.connect.SessionType] = None)
 
 
+case class GetSessionForMarketplace(marketplaceSessionId: String,
+  publisherId: Option[Int] = None,
+  programId: Option[Int] = None,
+  publicKey: String,
+  signature: String,
+  nonce: String,
+  timestamp: String)
+
+
+case class GetSessionForMarketplaceResponse(session: Option[soap.connect.SessionType] = None)
+
+
 case class SessionType(connectId: String,
   sessionKey: Option[String] = None,
   secretKey: Option[String] = None,
   sessionExpires: Int,
   offlineToken: Option[String] = None)
+
+
+case class OfflineSessionType(connectId: String,
+  sessionKey: Option[String] = None,
+  secretKey: Option[String] = None,
+  connectSessionToken: Option[String] = None)
 
 
 case class CreateConnectRequest(applicationId: String,
@@ -105,5 +123,114 @@ case class GetOfflineSession(offlineToken: String,
   timestamp: String)
 
 
-case class GetOfflineSessionResponse(session: Option[soap.connect.SessionType] = None)
+case class GetOfflineSessionResponse(session: soap.connect.OfflineSessionType)
+
+trait LoginStatusEnum
+
+object LoginStatusEnum {
+  def fromString(value: String): LoginStatusEnum = value match {
+    case "enabled" => Enabled
+    case "disabled" => Disabled
+    case "pre-deleted" => Predeleted
+    case "deleted" => Deleted
+
+  }
+}
+
+case object Enabled extends LoginStatusEnum { override def toString = "enabled" }
+case object Disabled extends LoginStatusEnum { override def toString = "disabled" }
+case object Predeleted extends LoginStatusEnum { override def toString = "pre-deleted" }
+case object Deleted extends LoginStatusEnum { override def toString = "deleted" }
+
+trait LoginTypeEnum
+
+object LoginTypeEnum {
+  def fromString(value: String): LoginTypeEnum = value match {
+    case "owner" => Owner
+    case "admin" => Admin
+    case "full_access" => Full_access
+    case "viewer" => Viewer
+    case "restricted_viewer" => Restricted_viewer
+
+  }
+}
+
+case object Owner extends LoginTypeEnum { override def toString = "owner" }
+case object Admin extends LoginTypeEnum { override def toString = "admin" }
+case object Full_access extends LoginTypeEnum { override def toString = "full_access" }
+case object Viewer extends LoginTypeEnum { override def toString = "viewer" }
+case object Restricted_viewer extends LoginTypeEnum { override def toString = "restricted_viewer" }
+
+
+case class UserLoginItem(programId: Option[Int] = None,
+  firstName: String,
+  lastName: String,
+  language: Option[String] = None,
+  currency: Option[String] = None,
+  loginName: String,
+  description: Option[String] = None,
+  status: soap.connect.LoginStatusEnum,
+  loginType: Option[soap.connect.LoginTypeEnum] = None,
+  isMaster: Option[Boolean] = None,
+  darwinUserId: Option[Int] = None,
+  connectId: Option[String] = None)
+
+
+case class UserLoginUpdateItem(firstName: Option[String] = None,
+  lastName: Option[String] = None,
+  language: Option[String] = None,
+  currency: Option[String] = None,
+  description: Option[String] = None,
+  status: Option[soap.connect.LoginStatusEnum] = None,
+  loginType: Option[soap.connect.LoginTypeEnum] = None)
+
+
+case class CreateAnonymousUserLoginRequest(userLoginItem: soap.connect.UserLoginItem,
+  connectId: String,
+  timestamp: String,
+  nonce: String,
+  signature: String)
+
+
+case class GetPermanentToken(authToken: Option[String] = None,
+  connectId: Option[String] = None,
+  publicKey: String,
+  signature: String,
+  nonce: String,
+  timestamp: String)
+
+
+case class GetPermanentTokenResponse(permanentToken: String)
+
+
+case class CreateAnonymousUserLoginResponse(userLoginItem: soap.connect.UserLoginItem,
+  permanentToken: String)
+
+
+case class GetUserLoginRequest(connectId: String,
+  signature: String,
+  nonce: String,
+  timestamp: String)
+
+
+case class GetUserLoginResponse(userLoginItem: Option[soap.connect.UserLoginItem] = None)
+
+
+case class UpdateAnonymousUserLoginRequest(userLoginUpdateItem: soap.connect.UserLoginUpdateItem,
+  connectId: String,
+  timestamp: String,
+  nonce: String,
+  signature: String)
+
+
+case class UpdateAnonymousUserLoginResponse(userLoginItem: soap.connect.UserLoginItem)
+
+
+case class DeleteAnonymousUserLoginRequest(connectId: String,
+  timestamp: String,
+  nonce: String,
+  signature: String)
+
+
+case class DeleteAnonymousUserLoginResponse(successful: Boolean)
 

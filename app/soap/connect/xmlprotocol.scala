@@ -14,7 +14,10 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
     Some("xsi") -> "http://www.w3.org/2001/XMLSchema-instance")
   implicit lazy val ConnectGetSessionFormat: scalaxb.XMLFormat[soap.connect.GetSession] = new DefaultConnectGetSessionFormat {}
   implicit lazy val ConnectGetSessionResponseFormat: scalaxb.XMLFormat[soap.connect.GetSessionResponse] = new DefaultConnectGetSessionResponseFormat {}
+  implicit lazy val ConnectGetSessionForMarketplaceFormat: scalaxb.XMLFormat[soap.connect.GetSessionForMarketplace] = new DefaultConnectGetSessionForMarketplaceFormat {}
+  implicit lazy val ConnectGetSessionForMarketplaceResponseFormat: scalaxb.XMLFormat[soap.connect.GetSessionForMarketplaceResponse] = new DefaultConnectGetSessionForMarketplaceResponseFormat {}
   implicit lazy val ConnectSessionTypeFormat: scalaxb.XMLFormat[soap.connect.SessionType] = new DefaultConnectSessionTypeFormat {}
+  implicit lazy val ConnectOfflineSessionTypeFormat: scalaxb.XMLFormat[soap.connect.OfflineSessionType] = new DefaultConnectOfflineSessionTypeFormat {}
   implicit lazy val ConnectCreateConnectRequestFormat: scalaxb.XMLFormat[soap.connect.CreateConnectRequest] = new DefaultConnectCreateConnectRequestFormat {}
   implicit lazy val ConnectCreateConnectResponseFormat: scalaxb.XMLFormat[soap.connect.CreateConnectResponse] = new DefaultConnectCreateConnectResponseFormat {}
   implicit lazy val ConnectRoleTypeFormat: scalaxb.XMLFormat[soap.connect.RoleType] = new DefaultConnectRoleTypeFormat {}
@@ -28,6 +31,20 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   implicit lazy val ConnectPromoteTypeEnumFormat: scalaxb.XMLFormat[soap.connect.PromoteTypeEnum] = new DefaultConnectPromoteTypeEnumFormat {}
   implicit lazy val ConnectGetOfflineSessionFormat: scalaxb.XMLFormat[soap.connect.GetOfflineSession] = new DefaultConnectGetOfflineSessionFormat {}
   implicit lazy val ConnectGetOfflineSessionResponseFormat: scalaxb.XMLFormat[soap.connect.GetOfflineSessionResponse] = new DefaultConnectGetOfflineSessionResponseFormat {}
+  implicit lazy val ConnectLoginStatusEnumFormat: scalaxb.XMLFormat[soap.connect.LoginStatusEnum] = new DefaultConnectLoginStatusEnumFormat {}
+  implicit lazy val ConnectLoginTypeEnumFormat: scalaxb.XMLFormat[soap.connect.LoginTypeEnum] = new DefaultConnectLoginTypeEnumFormat {}
+  implicit lazy val ConnectUserLoginItemFormat: scalaxb.XMLFormat[soap.connect.UserLoginItem] = new DefaultConnectUserLoginItemFormat {}
+  implicit lazy val ConnectUserLoginUpdateItemFormat: scalaxb.XMLFormat[soap.connect.UserLoginUpdateItem] = new DefaultConnectUserLoginUpdateItemFormat {}
+  implicit lazy val ConnectCreateAnonymousUserLoginRequestFormat: scalaxb.XMLFormat[soap.connect.CreateAnonymousUserLoginRequest] = new DefaultConnectCreateAnonymousUserLoginRequestFormat {}
+  implicit lazy val ConnectGetPermanentTokenFormat: scalaxb.XMLFormat[soap.connect.GetPermanentToken] = new DefaultConnectGetPermanentTokenFormat {}
+  implicit lazy val ConnectGetPermanentTokenResponseFormat: scalaxb.XMLFormat[soap.connect.GetPermanentTokenResponse] = new DefaultConnectGetPermanentTokenResponseFormat {}
+  implicit lazy val ConnectCreateAnonymousUserLoginResponseFormat: scalaxb.XMLFormat[soap.connect.CreateAnonymousUserLoginResponse] = new DefaultConnectCreateAnonymousUserLoginResponseFormat {}
+  implicit lazy val ConnectGetUserLoginRequestFormat: scalaxb.XMLFormat[soap.connect.GetUserLoginRequest] = new DefaultConnectGetUserLoginRequestFormat {}
+  implicit lazy val ConnectGetUserLoginResponseFormat: scalaxb.XMLFormat[soap.connect.GetUserLoginResponse] = new DefaultConnectGetUserLoginResponseFormat {}
+  implicit lazy val ConnectUpdateAnonymousUserLoginRequestFormat: scalaxb.XMLFormat[soap.connect.UpdateAnonymousUserLoginRequest] = new DefaultConnectUpdateAnonymousUserLoginRequestFormat {}
+  implicit lazy val ConnectUpdateAnonymousUserLoginResponseFormat: scalaxb.XMLFormat[soap.connect.UpdateAnonymousUserLoginResponse] = new DefaultConnectUpdateAnonymousUserLoginResponseFormat {}
+  implicit lazy val ConnectDeleteAnonymousUserLoginRequestFormat: scalaxb.XMLFormat[soap.connect.DeleteAnonymousUserLoginRequest] = new DefaultConnectDeleteAnonymousUserLoginRequestFormat {}
+  implicit lazy val ConnectDeleteAnonymousUserLoginResponseFormat: scalaxb.XMLFormat[soap.connect.DeleteAnonymousUserLoginResponse] = new DefaultConnectDeleteAnonymousUserLoginResponseFormat {}
 
   trait DefaultConnectGetSessionFormat extends scalaxb.ElemNameParser[soap.connect.GetSession] {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
@@ -67,6 +84,50 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
 
   }
 
+  trait DefaultConnectGetSessionForMarketplaceFormat extends scalaxb.ElemNameParser[soap.connect.GetSessionForMarketplace] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetSessionForMarketplace] =
+      phrase((scalaxb.ElemName(None, "marketplaceSessionId")) ~ 
+      opt(scalaxb.ElemName(None, "publisherId")) ~ 
+      opt(scalaxb.ElemName(None, "programId")) ~ 
+      (scalaxb.ElemName(None, "publicKey")) ~ 
+      (scalaxb.ElemName(None, "signature")) ~ 
+      (scalaxb.ElemName(None, "nonce")) ~ 
+      (scalaxb.ElemName(None, "timestamp")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 =>
+      soap.connect.GetSessionForMarketplace(scalaxb.fromXML[String](p1, scalaxb.ElemName(node) :: stack),
+        p2.headOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[String](p4, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p5, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p6, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p7, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.GetSessionForMarketplace, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[String](__obj.marketplaceSessionId, None, Some("marketplaceSessionId"), __scope, false),
+        __obj.publisherId map { scalaxb.toXML[Int](_, None, Some("publisherId"), __scope, false) } getOrElse {Nil},
+        __obj.programId map { scalaxb.toXML[Int](_, None, Some("programId"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[String](__obj.publicKey, None, Some("publicKey"), __scope, false),
+        scalaxb.toXML[String](__obj.signature, None, Some("signature"), __scope, false),
+        scalaxb.toXML[String](__obj.nonce, None, Some("nonce"), __scope, false),
+        scalaxb.toXML[String](__obj.timestamp, None, Some("timestamp"), __scope, false))
+
+  }
+
+  trait DefaultConnectGetSessionForMarketplaceResponseFormat extends scalaxb.ElemNameParser[soap.connect.GetSessionForMarketplaceResponse] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetSessionForMarketplaceResponse] =
+      phrase(opt(scalaxb.ElemName(None, "session")) ^^
+      { case p1 =>
+      soap.connect.GetSessionForMarketplaceResponse(p1.headOption map { scalaxb.fromXML[soap.connect.SessionType](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: soap.connect.GetSessionForMarketplaceResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.session map { scalaxb.toXML[soap.connect.SessionType](_, None, Some("session"), __scope, false) } getOrElse {Nil})
+
+  }
+
   trait DefaultConnectSessionTypeFormat extends scalaxb.ElemNameParser[soap.connect.SessionType] {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
@@ -91,6 +152,30 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
         __obj.secretKey map { scalaxb.toXML[String](_, None, Some("secretKey"), __scope, false) } getOrElse {Nil},
         scalaxb.toXML[Int](__obj.sessionExpires, None, Some("sessionExpires"), __scope, false),
         __obj.offlineToken map { scalaxb.toXML[String](_, None, Some("offlineToken"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultConnectOfflineSessionTypeFormat extends scalaxb.ElemNameParser[soap.connect.OfflineSessionType] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    override def typeName: Option[String] = Some("offlineSessionType")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.OfflineSessionType] =
+      phrase((scalaxb.ElemName(None, "connectId")) ~ 
+      opt(scalaxb.ElemName(None, "sessionKey")) ~ 
+      opt(scalaxb.ElemName(None, "secretKey")) ~ 
+      opt(scalaxb.ElemName(None, "connectSessionToken")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 =>
+      soap.connect.OfflineSessionType(scalaxb.fromXML[String](p1, scalaxb.ElemName(node) :: stack),
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: soap.connect.OfflineSessionType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[String](__obj.connectId, None, Some("connectId"), __scope, false),
+        __obj.sessionKey map { scalaxb.toXML[String](_, None, Some("sessionKey"), __scope, false) } getOrElse {Nil},
+        __obj.secretKey map { scalaxb.toXML[String](_, None, Some("secretKey"), __scope, false) } getOrElse {Nil},
+        __obj.connectSessionToken map { scalaxb.toXML[String](_, None, Some("connectSessionToken"), __scope, false) } getOrElse {Nil})
 
   }
 
@@ -335,12 +420,315 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
     def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetOfflineSessionResponse] =
-      phrase(opt(scalaxb.ElemName(None, "session")) ^^
+      phrase((scalaxb.ElemName(None, "session")) ^^
       { case p1 =>
-      soap.connect.GetOfflineSessionResponse(p1.headOption map { scalaxb.fromXML[soap.connect.SessionType](_, scalaxb.ElemName(node) :: stack) }) })
+      soap.connect.GetOfflineSessionResponse(scalaxb.fromXML[soap.connect.OfflineSessionType](p1, scalaxb.ElemName(node) :: stack)) })
     
     def writesChildNodes(__obj: soap.connect.GetOfflineSessionResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.session map { scalaxb.toXML[soap.connect.SessionType](_, None, Some("session"), __scope, false) } getOrElse {Nil})
+      (scalaxb.toXML[soap.connect.OfflineSessionType](__obj.session, None, Some("session"), __scope, false))
+
+  }
+
+  def buildConnectLoginStatusEnumFormat = new DefaultConnectLoginStatusEnumFormat {}
+  trait DefaultConnectLoginStatusEnumFormat extends scalaxb.XMLFormat[soap.connect.LoginStatusEnum] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.LoginStatusEnum] =
+      Right(soap.connect.LoginStatusEnum.fromString(seq.text))
+    
+    def writes(__obj: soap.connect.LoginStatusEnum, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  def buildConnectLoginTypeEnumFormat = new DefaultConnectLoginTypeEnumFormat {}
+  trait DefaultConnectLoginTypeEnumFormat extends scalaxb.XMLFormat[soap.connect.LoginTypeEnum] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.LoginTypeEnum] =
+      Right(soap.connect.LoginTypeEnum.fromString(seq.text))
+    
+    def writes(__obj: soap.connect.LoginTypeEnum, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  trait DefaultConnectUserLoginItemFormat extends scalaxb.ElemNameParser[soap.connect.UserLoginItem] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    override def typeName: Option[String] = Some("userLoginItem")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.UserLoginItem] =
+      phrase(opt(scalaxb.ElemName(None, "programId")) ~ 
+      (scalaxb.ElemName(None, "firstName")) ~ 
+      (scalaxb.ElemName(None, "lastName")) ~ 
+      opt(scalaxb.ElemName(None, "language")) ~ 
+      opt(scalaxb.ElemName(None, "currency")) ~ 
+      (scalaxb.ElemName(None, "loginName")) ~ 
+      opt(scalaxb.ElemName(None, "description")) ~ 
+      (scalaxb.ElemName(None, "status")) ~ 
+      opt(scalaxb.ElemName(None, "loginType")) ~ 
+      opt(scalaxb.ElemName(None, "isMaster")) ~ 
+      opt(scalaxb.ElemName(None, "darwinUserId")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 =>
+      soap.connect.UserLoginItem(p1.headOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[String](p2, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p3, scalaxb.ElemName(node) :: stack),
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[String](p6, scalaxb.ElemName(node) :: stack),
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[soap.connect.LoginStatusEnum](p8, scalaxb.ElemName(node) :: stack),
+        p9.headOption map { scalaxb.fromXML[soap.connect.LoginTypeEnum](_, scalaxb.ElemName(node) :: stack) },
+        p10.headOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p11.headOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        (node \ "@connectId").headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    override def writesAttribute(__obj: soap.connect.UserLoginItem, __scope: scala.xml.NamespaceBinding): scala.xml.MetaData = {
+      var attr: scala.xml.MetaData  = scala.xml.Null
+      __obj.connectId foreach { x => attr = scala.xml.Attribute(null, "connectId", x.toString, attr) }
+      attr
+    }
+
+    def writesChildNodes(__obj: soap.connect.UserLoginItem, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.programId map { scalaxb.toXML[Int](_, None, Some("programId"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[String](__obj.firstName, None, Some("firstName"), __scope, false),
+        scalaxb.toXML[String](__obj.lastName, None, Some("lastName"), __scope, false),
+        __obj.language map { scalaxb.toXML[String](_, None, Some("language"), __scope, false) } getOrElse {Nil},
+        __obj.currency map { scalaxb.toXML[String](_, None, Some("currency"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[String](__obj.loginName, None, Some("loginName"), __scope, false),
+        __obj.description map { scalaxb.toXML[String](_, None, Some("description"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[soap.connect.LoginStatusEnum](__obj.status, None, Some("status"), __scope, false),
+        __obj.loginType map { scalaxb.toXML[soap.connect.LoginTypeEnum](_, None, Some("loginType"), __scope, false) } getOrElse {Nil},
+        __obj.isMaster map { scalaxb.toXML[Boolean](_, None, Some("isMaster"), __scope, false) } getOrElse {Nil},
+        __obj.darwinUserId map { scalaxb.toXML[Int](_, None, Some("darwinUserId"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultConnectUserLoginUpdateItemFormat extends scalaxb.ElemNameParser[soap.connect.UserLoginUpdateItem] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    override def typeName: Option[String] = Some("userLoginUpdateItem")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.UserLoginUpdateItem] =
+      phrase(opt(scalaxb.ElemName(None, "firstName")) ~ 
+      opt(scalaxb.ElemName(None, "lastName")) ~ 
+      opt(scalaxb.ElemName(None, "language")) ~ 
+      opt(scalaxb.ElemName(None, "currency")) ~ 
+      opt(scalaxb.ElemName(None, "description")) ~ 
+      opt(scalaxb.ElemName(None, "status")) ~ 
+      opt(scalaxb.ElemName(None, "loginType")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 =>
+      soap.connect.UserLoginUpdateItem(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[soap.connect.LoginStatusEnum](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[soap.connect.LoginTypeEnum](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: soap.connect.UserLoginUpdateItem, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.firstName map { scalaxb.toXML[String](_, None, Some("firstName"), __scope, false) } getOrElse {Nil},
+        __obj.lastName map { scalaxb.toXML[String](_, None, Some("lastName"), __scope, false) } getOrElse {Nil},
+        __obj.language map { scalaxb.toXML[String](_, None, Some("language"), __scope, false) } getOrElse {Nil},
+        __obj.currency map { scalaxb.toXML[String](_, None, Some("currency"), __scope, false) } getOrElse {Nil},
+        __obj.description map { scalaxb.toXML[String](_, None, Some("description"), __scope, false) } getOrElse {Nil},
+        __obj.status map { scalaxb.toXML[soap.connect.LoginStatusEnum](_, None, Some("status"), __scope, false) } getOrElse {Nil},
+        __obj.loginType map { scalaxb.toXML[soap.connect.LoginTypeEnum](_, None, Some("loginType"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultConnectCreateAnonymousUserLoginRequestFormat extends scalaxb.ElemNameParser[soap.connect.CreateAnonymousUserLoginRequest] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.CreateAnonymousUserLoginRequest] =
+      phrase((scalaxb.ElemName(None, "userLoginItem")) ~ 
+      (scalaxb.ElemName(None, "connectId")) ~ 
+      (scalaxb.ElemName(None, "timestamp")) ~ 
+      (scalaxb.ElemName(None, "nonce")) ~ 
+      (scalaxb.ElemName(None, "signature")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
+      soap.connect.CreateAnonymousUserLoginRequest(scalaxb.fromXML[soap.connect.UserLoginItem](p1, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p2, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p3, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p4, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p5, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.CreateAnonymousUserLoginRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[soap.connect.UserLoginItem](__obj.userLoginItem, None, Some("userLoginItem"), __scope, false),
+        scalaxb.toXML[String](__obj.connectId, None, Some("connectId"), __scope, false),
+        scalaxb.toXML[String](__obj.timestamp, None, Some("timestamp"), __scope, false),
+        scalaxb.toXML[String](__obj.nonce, None, Some("nonce"), __scope, false),
+        scalaxb.toXML[String](__obj.signature, None, Some("signature"), __scope, false))
+
+  }
+
+  trait DefaultConnectGetPermanentTokenFormat extends scalaxb.ElemNameParser[soap.connect.GetPermanentToken] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetPermanentToken] =
+      phrase(opt(scalaxb.ElemName(None, "authToken")) ~ 
+      opt(scalaxb.ElemName(None, "connectId")) ~ 
+      (scalaxb.ElemName(None, "publicKey")) ~ 
+      (scalaxb.ElemName(None, "signature")) ~ 
+      (scalaxb.ElemName(None, "nonce")) ~ 
+      (scalaxb.ElemName(None, "timestamp")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 =>
+      soap.connect.GetPermanentToken(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[String](p3, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p4, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p5, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p6, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.GetPermanentToken, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.authToken map { scalaxb.toXML[String](_, None, Some("authToken"), __scope, false) } getOrElse {Nil},
+        __obj.connectId map { scalaxb.toXML[String](_, None, Some("connectId"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[String](__obj.publicKey, None, Some("publicKey"), __scope, false),
+        scalaxb.toXML[String](__obj.signature, None, Some("signature"), __scope, false),
+        scalaxb.toXML[String](__obj.nonce, None, Some("nonce"), __scope, false),
+        scalaxb.toXML[String](__obj.timestamp, None, Some("timestamp"), __scope, false))
+
+  }
+
+  trait DefaultConnectGetPermanentTokenResponseFormat extends scalaxb.ElemNameParser[soap.connect.GetPermanentTokenResponse] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetPermanentTokenResponse] =
+      phrase((scalaxb.ElemName(None, "permanentToken")) ^^
+      { case p1 =>
+      soap.connect.GetPermanentTokenResponse(scalaxb.fromXML[String](p1, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.GetPermanentTokenResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[String](__obj.permanentToken, None, Some("permanentToken"), __scope, false))
+
+  }
+
+  trait DefaultConnectCreateAnonymousUserLoginResponseFormat extends scalaxb.ElemNameParser[soap.connect.CreateAnonymousUserLoginResponse] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.CreateAnonymousUserLoginResponse] =
+      phrase((scalaxb.ElemName(None, "userLoginItem")) ~ 
+      (scalaxb.ElemName(None, "permanentToken")) ^^
+      { case p1 ~ p2 =>
+      soap.connect.CreateAnonymousUserLoginResponse(scalaxb.fromXML[soap.connect.UserLoginItem](p1, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p2, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.CreateAnonymousUserLoginResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[soap.connect.UserLoginItem](__obj.userLoginItem, None, Some("userLoginItem"), __scope, false),
+        scalaxb.toXML[String](__obj.permanentToken, None, Some("permanentToken"), __scope, false))
+
+  }
+
+  trait DefaultConnectGetUserLoginRequestFormat extends scalaxb.ElemNameParser[soap.connect.GetUserLoginRequest] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetUserLoginRequest] =
+      phrase((scalaxb.ElemName(None, "connectId")) ~ 
+      (scalaxb.ElemName(None, "signature")) ~ 
+      (scalaxb.ElemName(None, "nonce")) ~ 
+      (scalaxb.ElemName(None, "timestamp")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 =>
+      soap.connect.GetUserLoginRequest(scalaxb.fromXML[String](p1, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p2, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p3, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p4, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.GetUserLoginRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[String](__obj.connectId, None, Some("connectId"), __scope, false),
+        scalaxb.toXML[String](__obj.signature, None, Some("signature"), __scope, false),
+        scalaxb.toXML[String](__obj.nonce, None, Some("nonce"), __scope, false),
+        scalaxb.toXML[String](__obj.timestamp, None, Some("timestamp"), __scope, false))
+
+  }
+
+  trait DefaultConnectGetUserLoginResponseFormat extends scalaxb.ElemNameParser[soap.connect.GetUserLoginResponse] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.GetUserLoginResponse] =
+      phrase(opt(scalaxb.ElemName(None, "userLoginItem")) ^^
+      { case p1 =>
+      soap.connect.GetUserLoginResponse(p1.headOption map { scalaxb.fromXML[soap.connect.UserLoginItem](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: soap.connect.GetUserLoginResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.userLoginItem map { scalaxb.toXML[soap.connect.UserLoginItem](_, None, Some("userLoginItem"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultConnectUpdateAnonymousUserLoginRequestFormat extends scalaxb.ElemNameParser[soap.connect.UpdateAnonymousUserLoginRequest] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.UpdateAnonymousUserLoginRequest] =
+      phrase((scalaxb.ElemName(None, "userLoginUpdateItem")) ~ 
+      (scalaxb.ElemName(None, "connectId")) ~ 
+      (scalaxb.ElemName(None, "timestamp")) ~ 
+      (scalaxb.ElemName(None, "nonce")) ~ 
+      (scalaxb.ElemName(None, "signature")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
+      soap.connect.UpdateAnonymousUserLoginRequest(scalaxb.fromXML[soap.connect.UserLoginUpdateItem](p1, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p2, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p3, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p4, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p5, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.UpdateAnonymousUserLoginRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[soap.connect.UserLoginUpdateItem](__obj.userLoginUpdateItem, None, Some("userLoginUpdateItem"), __scope, false),
+        scalaxb.toXML[String](__obj.connectId, None, Some("connectId"), __scope, false),
+        scalaxb.toXML[String](__obj.timestamp, None, Some("timestamp"), __scope, false),
+        scalaxb.toXML[String](__obj.nonce, None, Some("nonce"), __scope, false),
+        scalaxb.toXML[String](__obj.signature, None, Some("signature"), __scope, false))
+
+  }
+
+  trait DefaultConnectUpdateAnonymousUserLoginResponseFormat extends scalaxb.ElemNameParser[soap.connect.UpdateAnonymousUserLoginResponse] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.UpdateAnonymousUserLoginResponse] =
+      phrase((scalaxb.ElemName(None, "userLoginItem")) ^^
+      { case p1 =>
+      soap.connect.UpdateAnonymousUserLoginResponse(scalaxb.fromXML[soap.connect.UserLoginItem](p1, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.UpdateAnonymousUserLoginResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[soap.connect.UserLoginItem](__obj.userLoginItem, None, Some("userLoginItem"), __scope, false))
+
+  }
+
+  trait DefaultConnectDeleteAnonymousUserLoginRequestFormat extends scalaxb.ElemNameParser[soap.connect.DeleteAnonymousUserLoginRequest] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.DeleteAnonymousUserLoginRequest] =
+      phrase((scalaxb.ElemName(None, "connectId")) ~ 
+      (scalaxb.ElemName(None, "timestamp")) ~ 
+      (scalaxb.ElemName(None, "nonce")) ~ 
+      (scalaxb.ElemName(None, "signature")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 =>
+      soap.connect.DeleteAnonymousUserLoginRequest(scalaxb.fromXML[String](p1, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p2, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p3, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[String](p4, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.DeleteAnonymousUserLoginRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[String](__obj.connectId, None, Some("connectId"), __scope, false),
+        scalaxb.toXML[String](__obj.timestamp, None, Some("timestamp"), __scope, false),
+        scalaxb.toXML[String](__obj.nonce, None, Some("nonce"), __scope, false),
+        scalaxb.toXML[String](__obj.signature, None, Some("signature"), __scope, false))
+
+  }
+
+  trait DefaultConnectDeleteAnonymousUserLoginResponseFormat extends scalaxb.ElemNameParser[soap.connect.DeleteAnonymousUserLoginResponse] {
+    val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[soap.connect.DeleteAnonymousUserLoginResponse] =
+      phrase((scalaxb.ElemName(None, "successful")) ^^
+      { case p1 =>
+      soap.connect.DeleteAnonymousUserLoginResponse(scalaxb.fromXML[Boolean](p1, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: soap.connect.DeleteAnonymousUserLoginResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[Boolean](__obj.successful, None, Some("successful"), __scope, false))
 
   }
 
@@ -365,12 +753,12 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.CreateConnectResponse](body.headOption getOrElse {body}).connectId)
         }
-      def getOfflineSession(offlineToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetOfflineSessionResponse] = 
+      def getOfflineSession(offlineToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.OfflineSessionType] = 
         soapClient.requestResponse(scalaxb.toXML(soap.connect.GetOfflineSession(offlineToken, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2011-05-01/"), "getOfflineSession", defaultScope),
             Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/getOfflineSession"))) match {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
-            Right(scalaxb.fromXML[soap.connect.GetOfflineSessionResponse](body.headOption getOrElse {body}))
+            Right(scalaxb.fromXML[soap.connect.GetOfflineSessionResponse](body.headOption getOrElse {body}).session)
         }
       def getSession(authToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetSessionResponse] = 
         soapClient.requestResponse(scalaxb.toXML(soap.connect.GetSession(authToken, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2011-05-01/"), "getSession", defaultScope),
@@ -378,6 +766,13 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.GetSessionResponse](body.headOption getOrElse {body}))
+        }
+      def getSessionForMarketplace(marketplaceSessionId: String, publisherId: Option[Int], programId: Option[Int], publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetSessionForMarketplaceResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetSessionForMarketplace(marketplaceSessionId, publisherId, programId, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2011-05-01/"), "getSessionForMarketplace", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/getSessionForMarketplace"))) match {
+          case Left(x)  => Left(x.asFault[soap.connect.SoapException])
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[soap.connect.GetSessionForMarketplaceResponse](body.headOption getOrElse {body}))
         }
       def getUiUrl(connectId: String, sessionKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], String] = 
         soapClient.requestResponse(scalaxb.toXML(soap.connect.GetUiUrl(connectId, sessionKey, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "getUiUrl", defaultScope),
@@ -392,6 +787,41 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
           case Left(x)  => Left(x.asFault[soap.connect.SoapException])
           case Right((header, body)) =>
             Right(scalaxb.fromXML[soap.connect.PromoteSessionResponse](body.headOption getOrElse {body}))
+        }
+      def createAnonymousUserLogin(userLoginItem: soap.connect.UserLoginItem, connectId: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.CreateAnonymousUserLoginResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.CreateAnonymousUserLoginRequest(userLoginItem, connectId, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "createAnonymousUserLoginRequest", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/createAnonymousUserLogin"))) match {
+          case Left(x)  => Left(x.asFault[soap.connect.SoapException])
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[soap.connect.CreateAnonymousUserLoginResponse](body.headOption getOrElse {body}))
+        }
+      def getPermanentToken(authToken: Option[String], connectId: Option[String], publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], String] = 
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetPermanentToken(authToken, connectId, publicKey, signature, nonce, timestamp), Some("http://auth.zanox.com/2011-05-01/"), "getPermanentToken", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/getPermanentToken"))) match {
+          case Left(x)  => Left(x.asFault[soap.connect.SoapException])
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[soap.connect.GetPermanentTokenResponse](body.headOption getOrElse {body}).permanentToken)
+        }
+      def getUserLogin(connectId: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetUserLoginResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.GetUserLoginRequest(connectId, signature, nonce, timestamp), Some("http://auth.zanox.com/2011-05-01/"), "getUserLoginRequest", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/getUserLogin"))) match {
+          case Left(x)  => Left(x.asFault[soap.connect.SoapException])
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[soap.connect.GetUserLoginResponse](body.headOption getOrElse {body}))
+        }
+      def updateAnonymousUserLogin(userLoginUpdateItem: soap.connect.UserLoginUpdateItem, connectId: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.UserLoginItem] = 
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.UpdateAnonymousUserLoginRequest(userLoginUpdateItem, connectId, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "updateAnonymousUserLoginRequest", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/updateAnonymousUserLogin"))) match {
+          case Left(x)  => Left(x.asFault[soap.connect.SoapException])
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[soap.connect.UpdateAnonymousUserLoginResponse](body.headOption getOrElse {body}).userLoginItem)
+        }
+      def deleteAnonymousUserLogin(connectId: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], Boolean] = 
+        soapClient.requestResponse(scalaxb.toXML(soap.connect.DeleteAnonymousUserLoginRequest(connectId, timestamp, nonce, signature), Some("http://auth.zanox.com/2011-05-01/"), "deleteAnonymousUserLoginRequest", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("http://auth.zanox.com/2011-05-01/deleteAnonymousUserLogin"))) match {
+          case Left(x)  => Left(x.asFault[soap.connect.SoapException])
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[soap.connect.DeleteAnonymousUserLoginResponse](body.headOption getOrElse {body}).successful)
         }
     }
   }

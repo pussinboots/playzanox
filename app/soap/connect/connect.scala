@@ -5,10 +5,16 @@ package soap.connect
 trait ConnectServicePortType {
   def closeSession(connectId: String, publicKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.CloseSessionResponse]
   def createConnect(applicationId: String, connectId: Option[String], loginId: Option[Int], role: Option[soap.connect.RoleType], publicKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], String]
-  def getOfflineSession(offlineToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetOfflineSessionResponse]
+  def getOfflineSession(offlineToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.OfflineSessionType]
   def getSession(authToken: String, publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetSessionResponse]
+  def getSessionForMarketplace(marketplaceSessionId: String, publisherId: Option[Int], programId: Option[Int], publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetSessionForMarketplaceResponse]
   def getUiUrl(connectId: String, sessionKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], String]
   def promoteSession(connectId: String, promoteType: soap.connect.PromoteTypeEnum, publicKey: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.PromoteSessionResponse]
+  def createAnonymousUserLogin(userLoginItem: soap.connect.UserLoginItem, connectId: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.CreateAnonymousUserLoginResponse]
+  def getPermanentToken(authToken: Option[String], connectId: Option[String], publicKey: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], String]
+  def getUserLogin(connectId: String, signature: String, nonce: String, timestamp: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.GetUserLoginResponse]
+  def updateAnonymousUserLogin(userLoginUpdateItem: soap.connect.UserLoginUpdateItem, connectId: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], soap.connect.UserLoginItem]
+  def deleteAnonymousUserLogin(connectId: String, timestamp: String, nonce: String, signature: String): Either[scalaxb.Soap11Fault[soap.connect.SoapException], Boolean]
 }
 
 

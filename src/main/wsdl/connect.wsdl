@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns:tns="http://auth.zanox.com/2010-02-01/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://auth.zanox.com/2011-05-01/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ConnectService"
-	targetNamespace="http://auth.zanox.com/2010-02-01/">
+	targetNamespace="http://auth.zanox.com/2011-05-01/">
 	<wsdl:types>
-		<xsd:schema targetNamespace="http://auth.zanox.com/2010-02-01/">
+		<xsd:schema targetNamespace="http://auth.zanox.com/2011-05-01/">
 			<xsd:element name="getSession">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -24,6 +24,27 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
+			<xsd:element name="getSessionForMarketplace">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="marketplaceSessionId" type="xsd:string"></xsd:element>
+						<xsd:element name="publisherId" type="xsd:int" minOccurs="0"></xsd:element>
+						<xsd:element name="programId" type="xsd:int" minOccurs="0"></xsd:element>
+						<xsd:element name="publicKey" type="xsd:string"></xsd:element>
+						<xsd:element name="signature" type="xsd:string"></xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="timestamp" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getSessionForMarketplaceResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="session" type="tns:sessionType"
+							minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 			<xsd:complexType name="sessionType">
 				<xsd:sequence>
 					<xsd:element name="connectId" type="xsd:string"></xsd:element>
@@ -35,6 +56,20 @@
 					</xsd:element>
 					<xsd:element name="sessionExpires" type="xsd:int"></xsd:element>
 					<xsd:element name="offlineToken" type="xsd:string"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="offlineSessionType">
+				<xsd:sequence>
+					<xsd:element name="connectId" type="xsd:string"></xsd:element>
+					<xsd:element name="sessionKey" type="xsd:string"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="secretKey" type="xsd:string"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="connectSessionToken" type="xsd:string"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
 				</xsd:sequence>
@@ -165,12 +200,149 @@
 			<xsd:element name="getOfflineSessionResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="session" type="tns:sessionType"
-							minOccurs="0" maxOccurs="1" />
+						<xsd:element name="session"
+							type="tns:offlineSessionType">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>						
+			<xsd:simpleType name="loginStatusEnum">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="enabled" />
+					<xsd:enumeration value="disabled" />
+					<xsd:enumeration value="pre-deleted" />
+					<xsd:enumeration value="deleted" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="loginTypeEnum">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="owner" />
+					<xsd:enumeration value="admin" />
+					<xsd:enumeration value="full_access" />
+					<xsd:enumeration value="viewer" />
+					<xsd:enumeration value="restricted_viewer" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="userLoginItem">
+				<xsd:sequence>					
+					<xsd:element minOccurs="0" name="programId" type="xsd:int" />
+					<xsd:element name="firstName" type="xsd:string" />
+					<xsd:element name="lastName" type="xsd:string" />
+					<xsd:element minOccurs="0" name="language" type="xsd:string" />					
+					<xsd:element minOccurs="0" name="currency" type="xsd:string" />
+					<xsd:element name="loginName" type="xsd:string" />
+					<xsd:element minOccurs="0" name="description" type="xsd:string" />
+					<xsd:element name="status" type="tns:loginStatusEnum" />
+					<xsd:element minOccurs="0" name="loginType" type="tns:loginTypeEnum" />
+					<xsd:element minOccurs="0" name="isMaster" type="xsd:boolean" />
+					<xsd:element  minOccurs="0" name="darwinUserId" type="xsd:int" />
+				</xsd:sequence>
+				<xsd:attribute name="connectId" type="xsd:string" />
+			</xsd:complexType>
+			<xsd:complexType name="userLoginUpdateItem">
+				<xsd:sequence>					
+					<xsd:element minOccurs="0" name="firstName" type="xsd:string" />
+					<xsd:element minOccurs="0" name="lastName" type="xsd:string" />
+					<xsd:element minOccurs="0" name="language" type="xsd:string" />					
+					<xsd:element minOccurs="0" name="currency" type="xsd:string" />
+					<xsd:element minOccurs="0" name="description" type="xsd:string" />
+					<xsd:element minOccurs="0" name="status" type="tns:loginStatusEnum" />
+					<xsd:element minOccurs="0" name="loginType" type="tns:loginTypeEnum" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="createAnonymousUserLoginRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userLoginItem" type="tns:userLoginItem" />
+						<xsd:element name="connectId" type="xsd:string" />						
+						<xsd:element name="timestamp" type="xsd:string" />
+						<xsd:element name="nonce" type="xsd:string" />
+						<xsd:element name="signature" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPermanentToken">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="authToken" type="xsd:string" minOccurs="0"></xsd:element>
+						<xsd:element name="connectId" type="xsd:string" minOccurs="0"></xsd:element>
+						<xsd:element name="publicKey" type="xsd:string"></xsd:element>
+						<xsd:element name="signature" type="xsd:string"></xsd:element>
+						<xsd:element name="nonce" type="xsd:string"></xsd:element>
+						<xsd:element name="timestamp" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPermanentTokenResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="permanentToken" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createAnonymousUserLoginResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userLoginItem" type="tns:userLoginItem" />
+						<xsd:element name="permanentToken" type="xsd:string" />
+					</xsd:sequence>					
+				</xsd:complexType>
+			</xsd:element>						
+			<xsd:element name="getUserLoginRequest">
+				<xsd:complexType>
+					<xsd:sequence>						
+						<xsd:element name="connectId" type="xsd:string" />
+						<xsd:element name="signature" type="xsd:string" />						
+						<xsd:element name="nonce" type="xsd:string" />
+						<xsd:element name="timestamp" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>			
+			<xsd:element name="getUserLoginResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userLoginItem" type="tns:userLoginItem" minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateAnonymousUserLoginRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userLoginUpdateItem" type="tns:userLoginUpdateItem" />
+						<xsd:element name="connectId" type="xsd:string" />
+						<xsd:element name="timestamp" type="xsd:string" />
+						<xsd:element name="nonce" type="xsd:string" />
+						<xsd:element name="signature" type="xsd:string" />						
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateAnonymousUserLoginResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userLoginItem" type="tns:userLoginItem" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deleteAnonymousUserLoginRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="connectId" type="xsd:string" />						
+						<xsd:element name="timestamp" type="xsd:string" />
+						<xsd:element name="nonce" type="xsd:string" />
+						<xsd:element name="signature" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="deleteAnonymousUserLoginResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="successful" type="xsd:boolean" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 		</xsd:schema>
+		
 	</wsdl:types>
 	<wsdl:message name="getSessionRequest">
 		<wsdl:part element="tns:getSession" name="getSession" />
@@ -178,14 +350,44 @@
 	<wsdl:message name="getSessionResponse">
 		<wsdl:part element="tns:getSessionResponse" name="getSessionResponse" />
 	</wsdl:message>
+	<wsdl:message name="getSessionForMarketplaceRequest">
+		<wsdl:part element="tns:getSessionForMarketplace" name="getSessionForMarketplace" />
+	</wsdl:message>
+	<wsdl:message name="getSessionForMarketplaceResponse">
+		<wsdl:part element="tns:getSessionForMarketplaceResponse" name="getSessionForMarketplaceResponse" />
+	</wsdl:message>
 	<wsdl:message name="createConnectRequest">
 		<wsdl:part name="createConnectRequest" element="tns:createConnectRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="createConnectResponse">
 		<wsdl:part name="createConnectResponse" element="tns:createConnectResponse"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="createAnonymousUserLoginRequest">
+		<wsdl:part name="createAnonymousUserLoginRequest" element="tns:createAnonymousUserLoginRequest" />
+	</wsdl:message>
+	<wsdl:message name="createAnonymousUserLoginResponse">
+		<wsdl:part name="createAnonymousUserLoginResponse" element="tns:createAnonymousUserLoginResponse" />
+	</wsdl:message>
+	<wsdl:message name="getUserLoginRequest">
+		<wsdl:part name="getUserLoginRequest" element="tns:getUserLoginRequest" />
+	</wsdl:message>
+	<wsdl:message name="getUserLoginResponse">
+		<wsdl:part name="getUserLoginResponse" element="tns:getUserLoginResponse" />
+	</wsdl:message>	
 	<wsdl:message name="getUiUrlRequest">
 		<wsdl:part name="getUiUrl" element="tns:getUiUrl"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateAnonymousUserLoginRequest">
+		<wsdl:part name="updateAnonymousUserLoginRequest" element="tns:updateAnonymousUserLoginRequest" />
+	</wsdl:message>
+	<wsdl:message name="updateAnonymousUserLoginResponse">
+		<wsdl:part name="updateAnonymousUserLoginResponse" element="tns:updateAnonymousUserLoginResponse" />
+	</wsdl:message>
+	<wsdl:message name="deleteAnonymousUserLoginRequest">
+		<wsdl:part name="deleteAnonymousUserLoginRequest" element="tns:deleteAnonymousUserLoginRequest" />
+	</wsdl:message>
+	<wsdl:message name="deleteAnonymousUserLoginResponse">
+		<wsdl:part name="deleteAnonymousUserLoginResponse" element="tns:deleteAnonymousUserLoginResponse" />
 	</wsdl:message>
 	<wsdl:message name="getUiUrlResponse">
 		<wsdl:part name="getUiUrlResponse" element="tns:getUiUrlResponse"></wsdl:part>
@@ -211,6 +413,12 @@
 	<wsdl:message name="getOfflineSessionResponse">
 		<wsdl:part name="getOfflineSessionResponse" element="tns:getOfflineSessionResponse"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="getPermanentTokenRequest">
+		<wsdl:part name="getPermanentToken" element="tns:getPermanentToken"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPermanentTokenResponse">
+		<wsdl:part name="getPermanentTokenResponse" element="tns:getPermanentTokenResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:portType name="ConnectServicePortType">
 		<wsdl:operation name="closeSession">
 			<wsdl:input message="tns:closeSessionRequest"></wsdl:input>
@@ -222,14 +430,34 @@
 			<wsdl:output message="tns:createConnectResponse"></wsdl:output>
 			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
 		</wsdl:operation>
+		<wsdl:operation name="createAnonymousUserLogin">
+			<wsdl:input message="tns:createAnonymousUserLoginRequest" />
+			<wsdl:output message="tns:createAnonymousUserLoginResponse" />
+			<wsdl:fault name="SoapException" message="tns:SoapException" />
+		</wsdl:operation>
+		<wsdl:operation name="deleteAnonymousUserLogin">
+			<wsdl:input message="tns:deleteAnonymousUserLoginRequest" />
+			<wsdl:output message="tns:deleteAnonymousUserLoginResponse" />
+			<wsdl:fault name="SoapException" message="tns:SoapException" />
+		</wsdl:operation>
 		<wsdl:operation name="getOfflineSession">
 			<wsdl:input message="tns:getOfflineSessionRequest"></wsdl:input>
 			<wsdl:output message="tns:getOfflineSessionResponse"></wsdl:output>
 			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
 		</wsdl:operation>
+		<wsdl:operation name="getUserLogin">
+			<wsdl:input message="tns:getUserLoginRequest" />
+			<wsdl:output message="tns:getUserLoginResponse" />
+			<wsdl:fault name="SoapException" message="tns:SoapException" />
+		</wsdl:operation>	
 		<wsdl:operation name="getSession">
 			<wsdl:input message="tns:getSessionRequest" />
 			<wsdl:output message="tns:getSessionResponse" />
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getSessionForMarketplace">
+			<wsdl:input message="tns:getSessionForMarketplaceRequest" />
+			<wsdl:output message="tns:getSessionForMarketplaceResponse" />
 			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getUiUrl">
@@ -242,12 +470,22 @@
 			<wsdl:output message="tns:promoteSessionResponse"></wsdl:output>
 			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
 		</wsdl:operation>
+		<wsdl:operation name="getPermanentToken">
+			<wsdl:input message="tns:getPermanentTokenRequest"></wsdl:input>
+			<wsdl:output message="tns:getPermanentTokenResponse"></wsdl:output>
+			<wsdl:fault name="SoapException" message="tns:SoapException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updateAnonymousUserLogin">
+			<wsdl:input message="tns:updateAnonymousUserLoginRequest" />
+			<wsdl:output message="tns:updateAnonymousUserLoginResponse" />
+			<wsdl:fault name="SoapException" message="tns:SoapException" />
+		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="ConnectServiceBinding" type="tns:ConnectServicePortType">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<wsdl:operation name="closeSession">
-			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/closeSession" />
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/closeSession" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -259,7 +497,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="createConnect">
-			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/createConnect" />
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/createConnect" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -271,7 +509,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getOfflineSession">
-			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/getOfflineSession" />
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/getOfflineSession" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -280,7 +518,19 @@
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getSession">
-			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/getSession" />
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/getSession" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getSessionForMarketplace">
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/getSessionForMarketplace" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -292,7 +542,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getUiUrl">
-			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/getUiUrl" />
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/getUiUrl" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -304,7 +554,19 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="promoteSession">
-			<soap:operation soapAction="http://auth.zanox.com/2010-02-01/promoteSession" />
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/promoteSession" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>		
+		<wsdl:operation name="createAnonymousUserLogin">
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/createAnonymousUserLogin" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -315,10 +577,58 @@
 				<soap:fault use="literal" name="SoapException" />
 			</wsdl:fault>
 		</wsdl:operation>
+		<wsdl:operation name="getPermanentToken">
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/getPermanentToken" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getUserLogin">
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/getUserLogin" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>		
+		<wsdl:operation name="updateAnonymousUserLogin">
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/updateAnonymousUserLogin" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="deleteAnonymousUserLogin">
+			<soap:operation soapAction="http://auth.zanox.com/2011-05-01/deleteAnonymousUserLogin" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SoapException">
+				<soap:fault use="literal" name="SoapException" />
+			</wsdl:fault>
+		</wsdl:operation>				
 	</wsdl:binding>
 	<wsdl:service name="ConnectService">
 		<wsdl:port binding="tns:ConnectServiceBinding" name="ConnectServicePort">
-        <soap:address location="https://auth.zanox-affiliate.de/soap/2010-02-01" />
+             <soap:address location="https://auth.zanox.com/soap/2011-05-01" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

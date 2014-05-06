@@ -13,6 +13,7 @@ import java.util.Calendar
 object ConnectClient {
   val secretKey = System.getenv("secretKey");
   val appId = System.getenv("appid");
+  println("appid " + appId)
   println("key " + secretKey)
   val connect = new ConnectServiceBindings with Soap11Clients with DispatchHttpClients {}
 
@@ -22,7 +23,7 @@ object ConnectClient {
     val nonce = System.nanoTime().toString + System.nanoTime().toString;
     val timeStamp = SecurityUtils.parseSoapDateCalendarToString(now);
     val signature = SecurityUtils.createSoapSignature(secretKey, nonce, "ConnectService", "getSession", timeStamp)
-
+    println("sig " + signature)
     connect.service.getSession(
         authToken, 
         appId, 

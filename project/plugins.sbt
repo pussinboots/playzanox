@@ -11,4 +11,6 @@ resolvers += "sonatype-public" at "https://oss.sonatype.org/​content/repositor
 // Use the Play sbt plugin for Play projects
 addSbtPlugin("play" % "sbt-plugin" % "2.0.4")
 
+addSbtPlugin("org.scalaxb" % "sbt-scalaxb" % "1.0.1")
+
 //addSbtPlugin("com.typesafe.startscript" % "xsbt-start-script-plugin" % "0.5.0")
