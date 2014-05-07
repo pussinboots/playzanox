@@ -7,8 +7,6 @@ before_script:
 - unzip -q play-${PLAY_VERSION}.zip
 deploy:
   strategy: git
-  on:
-    master: designed
   provider: heroku 
   app: playzanox
   api_key: 
