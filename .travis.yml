@@ -17,3 +17,6 @@ notifications:
   email:
     on_success: never
     on_failure: change
+cache:
+  directories:
+  - $HOME/.ivy2
