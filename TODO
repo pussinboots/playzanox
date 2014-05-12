@@ -1,0 +1,4 @@
+- remove old css
+- integrate bootstrap css
+- develop a new little functional design with bootstrap css
+- integrate typeahead see http://angular-ui.github.io/bootstrap/ for program search
