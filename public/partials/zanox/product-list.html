@@ -18,14 +18,11 @@
             <option value="50">50</option>
           </select>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-2">
-
-			<ul class="products">
-				<li ng-repeat="programItem in products.programItems.programItem" class="thumbnail"><a
+        <div class="col-sm-6 col-md-4 col-lg-2" ng-repeat="programItem in products.programItems.programItem">
+			<a
 					href="#/product/{{programItem['@id']}}" class="thumb"><img ng-src="{{programItem.image}}"></a> <a
 					href="#/product/{{programItem['@id']}}">{{programItem.name}}</a> <a href="{{programItem.url}}">Shop</a>
 					<p>{{programItem.description}}</p></li>
-			</ul>
 		</div>
   </div>
 </div>
