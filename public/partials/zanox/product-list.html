@@ -1,28 +1,24 @@
 <script language="text/javascript">
 
 </script>
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
-       <hr/>
-      
-      Search: <input ng-model="query" value="">
-      
-      Region: <select ng-model="region" ng-change="update()">
-        <option value="DE">Deutschland</option>
-        <option value="it">Italien</option>
-      </select>
-      
-      Anzahl: <select ng-model="items" ng-change="update()">
-        <option value="10" selected="selected">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
-      
-    </div>
-    
-  </div>
-		<div style="float: right;" class="span10">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-2">
+           <hr/>
+          Search: <input ng-model="query" value="">
+          
+          Region: <select ng-model="region" ng-change="update()">
+            <option value="DE">Deutschland</option>
+            <option value="it">Italien</option>
+          </select>
+          
+          Anzahl: <select ng-model="items" ng-change="update()">
+            <option value="10" selected="selected">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-2">
 
 			<ul class="products">
 				<li ng-repeat="programItem in products.programItems.programItem" class="thumbnail"><a
@@ -31,5 +27,5 @@
 					<p>{{programItem.description}}</p></li>
 			</ul>
 		</div>
-	</div>
+  </div>
 </div>
