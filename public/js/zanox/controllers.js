@@ -2,14 +2,24 @@
 
 /* Controllers */
 
+function debounce(fn, delay) {
+  var timer = null;
+  return function () {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
+}
+
 function ProductListCtrl($scope, Product) {
-	//$scope.products = {programItems:{programItem:[{name:'test'}]}}
 	$scope.products = Product.query({items:$scope.items});
 	$scope.items = 10;  
-	$scope.update = function(){
-		//$scope.products = {programItems:{programItem:[{name:'test'}]}}
-		$scope.products = Product.query({q:$scope.query,region:$scope.region, items:$scope.items});
-	};
+	$scope.$watch('query', debounce(function() {
+        $scope.products = Product.query({q:$scope.query,region:$scope.region, items:$scope.items});
+        $scope.$apply();
+    }, 500));
 }
 
 function DashBoardCtrl($scope, $rootScope, Balance, BankAccounts, Profile) {
