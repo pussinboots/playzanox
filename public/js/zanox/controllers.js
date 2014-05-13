@@ -19,7 +19,7 @@ function ProductListCtrl($scope, Product) {
 	$scope.$watch('query', debounce(function() {
         $scope.products = Product.query({q:$scope.query,region:$scope.region, items:$scope.items});
         $scope.$apply();
-    }, 500));
+    }, 1000));
 }
 
 function DashBoardCtrl($scope, $rootScope, Balance, BankAccounts, Profile) {
