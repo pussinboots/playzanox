@@ -101,9 +101,9 @@
     			<!-- dynamic rendering of the menu based on the menues.json file see public/global/menues.json and the Menue service see services.js -->
                 <ul class="nav navbar-nav">    
     				<li ng-repeat="menu in global.menues">
-    					<a class="dropdown-toggle" data-toggle="dropdown" href="{{menu.link}}">{{menu.name}}</a>
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{menu.name}}</a>
             			<ul class="dropdown-menu">
-    						<li>{{menu.name}}</li>
+    						<li><a href="{{menu.link}}">{{menu.name}}</a></li>
     						<li ng-repeat="submenu in menu.submenues"><a href="{{submenu.link}}">{{submenu.name}}</a></li>
     					</ul>
     				</li>
