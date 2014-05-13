@@ -1,4 +1,4 @@
-<!--<div class="container-fluid">
+<div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
        <hr/>
@@ -19,72 +19,6 @@
     </div>
     
   </div>
-</div>-->
-<link href="images/zanox/pcombine.css" media="screen" rel="stylesheet" type="text/css">
-<div id="directoryLeft" style="float: left; min-width: 138px; width: 18%;">
-	<p id="resetSearch">
-		<span id="reset">Zurücksetzen</span>
-	</p>
-
-
-
-	<div id="directorySearch" class="boxLtGrey noPaddingBottom" data-param="searchTerms" data-refinetype="textBox">
-		<h2 class="noMarginBottom">Programme suchen</h2>
-		<dl class="zend_form">
-			<dd id="searchTerms-element">
-				<input placeholder="Name oder Suchbegriff" name="searchTerms" id="searchTerms" type="text" ng-model="query"
-					ng-change="update()" value="" size="5">
-			</dd>
-		</dl>
-	</div>
-	<!--<div id="directoryRefineby" class="boxLtGrey">
-		<h2 class="noMarginBottom">Suche einschränken</h2>
-
-		<h3>
-			<span class="expanded">Vertriebsgebiete</span>
-		</h3>
-		<div class="refinebyExpanded" id="affiliateSalesRegions">
-			<ul>
-				<li class="radio" id="affiliateSalesRegions-all"><label>Weitere Vertriebsgebiete</label> <select
-					ng-model="region" ng-change="update()">
-						<option value="DE">Deutschland</option>
-						<option value="it">Italien</option>
-				</select></li>
-			</ul>
-		</div>
-	</div>-->
-</div>
-
-<div style="position: relative" id="directory">
-	<div id="directoryResults" >
-		<div style="float: right;" id="resultsHeader">
-
-			<div style="float: right;" id="optionsButton">
-				<h3>Optionen</h3>
-				<ul id="optionsMenu" style="display: none;">
-					<li id="detailToggle" title="Auf Detailansicht umschalten" class="">
-						<h3 class="pointer">Detailansicht</h3>
-					</li>
-					<li title="Report als CSV-Datei herunterladen" class="pointer" id="downloadCSV">
-						<h3>CSV-Export</h3>
-					</li>
-					<li title="Report für Microsoft Office Excel herunterladen" class="pointer" id="downloadExcel">
-						<h3>Excel-Export</h3>
-					</li>
-				</ul>
-			</div>
-
-			<span style="float: right;" id="rows">Ergebnisse pro Seite: <select ng-model="items" ng-change="update()">
-					<option value="10" selected="selected">10</option>
-					<option value="20">20</option>
-					<option value="50">50</option>
-			</select>
-			</span>
-
-			<h1>
-				<strong>Alle Programme</strong> ({{products.total}})
-			</h1>
-		</div>
 		<div style="float: right;" class="span10">
 
 			<ul class="products">
@@ -96,5 +30,3 @@
 		</div>
 	</div>
 </div>
-<div class="clear"></div>
-<div class="clear"></div>
