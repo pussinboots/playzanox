@@ -5,7 +5,6 @@
 <meta name="fragment" content="#" />
 <title>Mini Zanox</title>
 <link rel="stylesheet" href="css/app.css">
-<link rel="stylesheet" href="css/bootstrap.css">
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type='text/javascript'></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type='text/javascript'></script>
@@ -97,13 +96,15 @@
 	
 	<nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
+            <div class="navbar-header">
     	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     			<!-- dynamic rendering of the menu based on the menues.json file see public/global/menues.json and the Menue service see services.js -->
                 <ul class="nav navbar-nav">    
     				<li ng-repeat="menu in global.menues">
