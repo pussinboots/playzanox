@@ -5,10 +5,14 @@ package soap.connect.utils
 //import com.zanox.api.lib.constants.ApiConst
 
 object RestTest {
+  val connectId = System.getenv("connectId")
+  val secretKey = System.getenv("secretKey")
+  val publicKey = System.getenv("publicKey")
+
   def main(args: Array[String]) {
 //	  val api = new ApiClient(ApiConst.PROTOCOL_JSON).getService();
-//	  api.setConnectId("D1EDB234699A6C05CFE9");
-//	  api.setSecretKey("f34E4F44c0cf45+A8596f2779c76b3/8c9aD324c");
+//	  api.setConnectId(connectId);
+//	  api.setSecretKey(secretKey);
 //	  
 //	  val profile = api.getProfile();
 //	  profile.getProfileItem().setMobile(null);
