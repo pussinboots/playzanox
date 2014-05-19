@@ -1,9 +1,9 @@
 language: scala
 script: play-${PLAY_VERSION}/play test
 env: 
-- PLAY_VERSION=2.0.4
+- PLAY_VERSION=2.2.3
 before_script: 
-- wget http://downloads.typesafe.com/releases/play-2.0.4.zip
+- wget http://downloads.typesafe.com/releases/play-2.2.3.zip
 - unzip -q play-${PLAY_VERSION}.zip
 before_deploy:
 - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
