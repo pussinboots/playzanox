@@ -47,7 +47,7 @@ object Application extends Controller {
       response()
     })
     writeResponseToDisk(fullUrl, result)
-    Ok(result).as("application/json").withHeaders("Cache-Control" -> "public, max-age=300, s-maxage=60")
+    Ok(result).as("application/json").withHeaders("Cache-Control" -> "public, max-age=300")
   }
   
   def proxyPut(fullUrl: String) = Action { request =>
@@ -55,7 +55,7 @@ object Application extends Controller {
      
     val response = Http(url(fullUrl).PUT << request.body.asJson.get.toString OK as.String)
     val result = response()
-    Ok(result).as("application/json").withHeaders("Cache-Control" -> "public, max-age=300, s-maxage=60")
+    Ok(result).as("application/json").withHeaders("Cache-Control" -> "public, max-age=300")
   }
 
   def loadFromDisk(fullUrl: String): Option[String] = {
