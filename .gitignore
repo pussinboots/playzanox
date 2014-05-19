@@ -7,3 +7,5 @@ tmp
 .history
 dist
 bin
+.idea
+.idea_modules
