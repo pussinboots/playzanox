@@ -230,8 +230,10 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   trait DefaultConnectRoleTypeFormat extends scalaxb.XMLFormat[soap.connect.RoleType] {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.RoleType] =
-      Right(soap.connect.RoleType.fromString(seq.text))
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.RoleType] = seq match {
+      case elem: scala.xml.Elem => Right(soap.connect.RoleType.fromString(elem.text, elem.scope))
+      case _ => Right(soap.connect.RoleType.fromString(seq.text, scala.xml.TopScope))
+    }
     
     def writes(__obj: soap.connect.RoleType, __namespace: Option[String], __elementLabel: Option[String],
         __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
@@ -321,6 +323,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
 
   trait DefaultConnectCloseSessionResponseFormat extends scalaxb.XMLFormat[soap.connect.CloseSessionResponse] with scalaxb.CanWriteChildNodes[soap.connect.CloseSessionResponse] {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
+    import scalaxb.ElemName._
     
     def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.CloseSessionResponse] = seq match {
       case node: scala.xml.Node => Right(soap.connect.CloseSessionResponse())
@@ -381,8 +384,10 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   trait DefaultConnectPromoteTypeEnumFormat extends scalaxb.XMLFormat[soap.connect.PromoteTypeEnum] {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.PromoteTypeEnum] =
-      Right(soap.connect.PromoteTypeEnum.fromString(seq.text))
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.PromoteTypeEnum] = seq match {
+      case elem: scala.xml.Elem => Right(soap.connect.PromoteTypeEnum.fromString(elem.text, elem.scope))
+      case _ => Right(soap.connect.PromoteTypeEnum.fromString(seq.text, scala.xml.TopScope))
+    }
     
     def writes(__obj: soap.connect.PromoteTypeEnum, __namespace: Option[String], __elementLabel: Option[String],
         __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
@@ -433,8 +438,10 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   trait DefaultConnectLoginStatusEnumFormat extends scalaxb.XMLFormat[soap.connect.LoginStatusEnum] {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.LoginStatusEnum] =
-      Right(soap.connect.LoginStatusEnum.fromString(seq.text))
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.LoginStatusEnum] = seq match {
+      case elem: scala.xml.Elem => Right(soap.connect.LoginStatusEnum.fromString(elem.text, elem.scope))
+      case _ => Right(soap.connect.LoginStatusEnum.fromString(seq.text, scala.xml.TopScope))
+    }
     
     def writes(__obj: soap.connect.LoginStatusEnum, __namespace: Option[String], __elementLabel: Option[String],
         __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
@@ -447,8 +454,10 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   trait DefaultConnectLoginTypeEnumFormat extends scalaxb.XMLFormat[soap.connect.LoginTypeEnum] {
     val targetNamespace: Option[String] = Some("http://auth.zanox.com/2011-05-01/")
     
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.LoginTypeEnum] =
-      Right(soap.connect.LoginTypeEnum.fromString(seq.text))
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, soap.connect.LoginTypeEnum] = seq match {
+      case elem: scala.xml.Elem => Right(soap.connect.LoginTypeEnum.fromString(elem.text, elem.scope))
+      case _ => Right(soap.connect.LoginTypeEnum.fromString(seq.text, scala.xml.TopScope))
+    }
     
     def writes(__obj: soap.connect.LoginTypeEnum, __namespace: Option[String], __elementLabel: Option[String],
         __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =

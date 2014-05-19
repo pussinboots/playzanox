@@ -12,7 +12,7 @@ object `package` {
   def fromXML[A](seq: NodeSeq, stack: List[ElemName] = Nil)
                 (implicit format: XMLFormat[A]): A = format.reads(seq, stack) match {
     case Right(a) => a
-    case Left(a) => throw new ParserFailure(a)
+    case Left(a) => throw new ParserFailure("Error while parsing %s: %s" format(seq.toString, a))
   }
 
   @implicitNotFound(msg = "Cannot find XMLFormat type class for ${A}")
@@ -174,8 +174,12 @@ trait XMLStandardTypes {
   }
 
   implicit lazy val __BooleanXMLFormat: XMLFormat[Boolean] = new XMLFormat[Boolean] {
-    def reads(seq: scala.xml.NodeSeq, stack: List[ElemName]): Either[String, Boolean] = try {
-      Right(seq.text.toBoolean) } catch { case e: Exception => Left(e.toString) }
+    def reads(seq: scala.xml.NodeSeq, stack: List[ElemName]): Either[String, Boolean] = 
+      seq.text match {
+        case "1" | "true" => Right(true)
+        case "0" | "false" => Right(false)
+        case x => Left("Invalid boolean: "+x)
+      }
 
     def writes(obj: Boolean, namespace: Option[String], elementLabel: Option[String],
         scope: scala.xml.NamespaceBinding, typeAttribute: Boolean): scala.xml.NodeSeq =
@@ -261,10 +265,15 @@ trait XMLStandardTypes {
   }
 
   implicit def seqXMLFormat[A: XMLFormat]: XMLFormat[Seq[A]] = new XMLFormat[Seq[A]] {
-    def reads(seq: scala.xml.NodeSeq, stack: List[ElemName]): Either[String, Seq[A]] = try {
-      val xs = Helper.splitBySpace(seq.text).toSeq
-      Right(xs map { x => fromXML[A](scala.xml.Text(x), stack) })
-    } catch { case e: Exception => Left(e.toString) }
+    def reads(seq: scala.xml.NodeSeq, stack: List[ElemName]): Either[String, Seq[A]] =
+    seq match {
+      case node: scala.xml.Node =>
+        try {
+          val xs = Helper.splitBySpace(node.text).toSeq
+          Right(xs map { x => fromXML[A](scala.xml.Elem(node.prefix, node.label, scala.xml.Null, node.scope, scala.xml.Text(x)), stack) })
+        } catch { case e: Exception => Left(e.toString) }
+      case _ => Left("Node expected: " + seq.toString)
+    }
 
     def writes(obj: Seq[A], namespace: Option[String], elementLabel: Option[String],
         scope: scala.xml.NamespaceBinding, typeAttribute: Boolean): scala.xml.NodeSeq =
@@ -401,15 +410,8 @@ object DataRecord extends XMLStandardTypes {
     case _ => DataRecord(value)
   }
 
-  def apply[A:CanWriteXML](node: Node, parent: Node, value: A): DataRecord[A] = node match {
-    case elem: Elem => DataRecord(node, value)
-    case attr: UnprefixedAttribute =>
-      val key = Some(attr.key)
-      DataRecord(None, key, value)
-    case attr: PrefixedAttribute =>
-      val ns = scalaxb.Helper.nullOrEmpty(attr.getNamespace(node))
-      val key = Some(attr.key)
-      DataRecord(ns, key, value)
+  // this is for long attributes
+  def apply[A:CanWriteXML](x: Node, parent: Node, value: A): DataRecord[A] = x match {
     case _ => DataRecord(value)
   }
 
@@ -577,7 +579,7 @@ object DataRecord extends XMLStandardTypes {
             case x => x
           }
       }
-    case _ => error("unknown DataRecord.")
+    case _ => sys.error("unknown DataRecord.")
   }
 }
 
@@ -604,6 +606,8 @@ object ElemName {
       elemName.node = node
       elemName
   }
+
+  implicit def toNodeSeq(elem: ElemName): scala.xml.NodeSeq = elem.node
 }
 
 trait AnyElemNameParser extends scala.util.parsing.combinator.Parsers {
@@ -631,7 +635,7 @@ trait CanWriteChildNodes[A] extends CanWriteXML[A] {
   def writes(obj: A, namespace: Option[String], elementLabel: Option[String],
       scope: scala.xml.NamespaceBinding, typeAttribute: Boolean): scala.xml.NodeSeq = {
     val elem =  scala.xml.Elem(Helper.getPrefix(namespace, scope).orNull,
-      elementLabel getOrElse { error("missing element label.") },
+      elementLabel getOrElse { sys.error("missing element label.") },
       writesAttribute(obj, scope),
       scope,
       writesChildNodes(obj, scope): _*)
@@ -644,7 +648,7 @@ trait CanWriteChildNodes[A] extends CanWriteXML[A] {
 
 trait AttributeGroupFormat[A] extends scalaxb.XMLFormat[A] {
   def writes(__obj: A, __namespace: Option[String], __elementLabel: Option[String],
-    __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = error("don't call me.")
+    __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = sys.error("don't call me.")
 
   def toAttribute(__obj: A, __attr: scala.xml.MetaData, __scope: scala.xml.NamespaceBinding): scala.xml.MetaData
 }
@@ -801,10 +805,10 @@ object Helper {
   }
 
   def toURI(value: String) =
-    java.net.URI.create(value)
+    java.net.URI.create(value.trim)
 
   def isNil(node: scala.xml.Node) =
-    (node \ ("@{" + XSI_URL + "}nil")).headOption map { _.text == "true" } getOrElse {
+    (node \ ("@{" + XSI_URL + "}nil")).headOption map { case x => x.text == "true" || x.text == "1" } getOrElse {
       false
     }
 

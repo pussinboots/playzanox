@@ -9,7 +9,7 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.Play.current
 import views._
-import dispatch._
+import dispatch._, Defaults._
 import soap.connect.utils.ConnectClient
 import spray.json._
 import DefaultJsonProtocol._

@@ -52,7 +52,7 @@ case class CreateConnectResponse(connectId: String)
 trait RoleType
 
 object RoleType {
-  def fromString(value: String): RoleType = value match {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): RoleType = value match {
     case "DEVELOPER" => DEVELOPER
     case "CUSTOMER" => CUSTOMER
     case "TESTER" => TESTER
@@ -103,7 +103,7 @@ case class PromoteSessionResponse(wsSessionExpires: Int,
 trait PromoteTypeEnum
 
 object PromoteTypeEnum {
-  def fromString(value: String): PromoteTypeEnum = value match {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): PromoteTypeEnum = value match {
     case "UISESSION" => UISESSION
     case "WSSESSION" => WSSESSION
     case "BOTH" => BOTH
@@ -128,10 +128,10 @@ case class GetOfflineSessionResponse(session: soap.connect.OfflineSessionType)
 trait LoginStatusEnum
 
 object LoginStatusEnum {
-  def fromString(value: String): LoginStatusEnum = value match {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): LoginStatusEnum = value match {
     case "enabled" => Enabled
     case "disabled" => Disabled
-    case "pre-deleted" => Predeleted
+    case "pre-deleted" => Preu45deleted
     case "deleted" => Deleted
 
   }
@@ -139,13 +139,13 @@ object LoginStatusEnum {
 
 case object Enabled extends LoginStatusEnum { override def toString = "enabled" }
 case object Disabled extends LoginStatusEnum { override def toString = "disabled" }
-case object Predeleted extends LoginStatusEnum { override def toString = "pre-deleted" }
+case object Preu45deleted extends LoginStatusEnum { override def toString = "pre-deleted" }
 case object Deleted extends LoginStatusEnum { override def toString = "deleted" }
 
 trait LoginTypeEnum
 
 object LoginTypeEnum {
-  def fromString(value: String): LoginTypeEnum = value match {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): LoginTypeEnum = value match {
     case "owner" => Owner
     case "admin" => Admin
     case "full_access" => Full_access
